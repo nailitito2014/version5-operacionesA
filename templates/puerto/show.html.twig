@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Puerto{% endblock %}
+
+{% block body %}
+    <h1>Puerto</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ puerto.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ puerto.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Fecha</th>
+                <td>{{ puerto.fecha ? puerto.fecha|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>FechaInsercion</th>
+                <td>{{ puerto.fechaInsercion ? puerto.fechaInsercion|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('puerto_index') }}">back to list</a>
+
+    <a href="{{ path('puerto_edit', {'id': puerto.id}) }}">edit</a>
+
+    {{ include('puerto/_delete_form.html.twig') }}
+{% endblock %}

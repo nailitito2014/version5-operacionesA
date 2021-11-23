@@ -1,0 +1,184 @@
+{% extends 'base.html.twig' %}
+{% block rootmenuclientes %}
+    class="start active open"
+{% endblock %}
+{% block body %}
+    <div class="page-content">
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i>
+                    <a href="#">Inicio</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="{{ path('cliente_index') }}">Clientes</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>  <a href="#">Detalle</a>  </li>          
+            </ul>
+        </div>
+        <div class="clearfix">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tabbable tabbable-custom boxless tabbable-reversed">
+                    <div class="tab-content">
+                        <div class="portlet-body form">
+                            <!-- BEGIN FORM-->
+                            <div class="form-horizontal" role="form">
+                                <div class="form-body">
+                                    <h3 class="form-section">Cliente - {{ cliente  }}</h3>
+                                    <div class="actions btn-set" style="float: right;margin-top: -5px;">
+                                        <button class="btn-warning btn-sm blue" id="modificar">Modificar</button>
+                                        <button type="button" class="btn default btn-sm" id="volveratras">  <i class="fa fa-angle-double-left"></i> Regresar</button>
+                                    </div><br><br>
+                                    <div class="row">
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Nombre</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if  cliente.nombre %}{{ cliente.nombre }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Apellidos</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if cliente.primerApellido %}{{ cliente.primerApellido }} {{ cliente.segundoApellido }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Categoría del cliente</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if cliente.categoriaCliente %}{{ cliente.categoriaCliente  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Pasaporte</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if cliente.pasaporte %}{{ cliente.pasaporte  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Carnét de identidad</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if cliente.carnetIdentidad %}{{ cliente.carnetIdentidad  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>País</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if cliente.pais %}{{ cliente.pais  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Fecha de inserción</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if cliente.fechaInsercion %}{{ cliente.fechaInsercion | date('d/m/Y')  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Fecha de certifico de inmigración</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if cliente.fechaCertificoInmigracion %}{{ cliente.fechaCertificoInmigracion | date('d/m/Y')  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Fecha de vencimiento de certifico de inmigración</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if cliente.fechaVencimientoCertificoInmigracion %}{{ cliente.fechaVencimientoCertificoInmigracion | date('d/m/Y')  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}   
+    <script>
+        $(document).ready(function () {
+            $(".fancybox").fancybox();
+        });
+        $("#volveratras").click(function ()
+        {
+            location.href = "{{ path('cliente_index') }}";
+        })
+        $("#modificar").click(function ()
+        {
+            location.href = "{{ path('cliente_edit', {'id' : cliente.id }) }}";
+        })
+    </script>
+
+{% endblock %}
+
+
+
+

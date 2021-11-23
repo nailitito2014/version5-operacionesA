@@ -1,0 +1,163 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css')}}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+{% block rootmenuclientes %}
+    class="start active open"
+{% endblock %}
+{% block body %}
+    <div class="page-content">
+        <div class="clearfix"></div><br>
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i>
+                    <a href="}">Inicio</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="#">Reportes</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="#">Búsquedas</a>
+                    <i class="fa fa-angle-right"></i>
+                    <a href="{{ path('busqueda_por_cliente') }}">Búsqueda por clientes</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet box blue-chambray">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-sitemap"></i>Búsqueda por clientes
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        {{ form_start (form, {attr: {novalidate: 'novalidate'}}) }}
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Nombre</label>
+                                    {{ form_widget(form.nombre, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                </div>
+                                 <div class="form-group">
+                                    <label class="col-md-10 control-label">Carnét de identidad</label>
+                                    {{ form_widget(form.carnetIdentidad, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                </div>
+                            </div>
+                                <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label class="col-md-8 control-label">Primer apellido</label>
+                                    {{ form_widget(form.primerApellido, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-8 control-label">País</label>
+                                    {{ form_widget(form.pais, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                 <div class="form-group">
+                                    <label class="col-md-8 control-label">Segundo apellido</label>
+                                    {{ form_widget(form.segundoApellido, { 'attr': {
+                                                    'class' : 'form-control',
+                                          } }) }}
+                                </div>
+                                 <div class="form-group">
+                                    <label class="col-md-8 control-label">Estado de cliente</label>
+                                    {{ form_widget(form.estadoCliente, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                </div>
+                            </div>
+                                 <div class="col-sm-3">
+                                 <div class="form-group">
+                                    <label class="col-md-8 control-label">Pasaporte</label>
+                                    {{ form_widget(form.pasaporte, { 'attr': {
+                                                    'class' : 'form-control',
+                                          } }) }}
+                                </div>
+                            </div>
+                         
+                        </div>
+                        {{ form_end (form) }}
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="box-body pad table-responsive">          
+                                    <table class="datatable table table-responsive table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="centrado">
+                                                    Nombre
+                                                </th>
+                                                <th class="centrado">
+                                                    Primer apellido
+                                                </th>
+                                                 <th class="centrado">
+                                                    Segundo apellido
+                                                </th>
+                                                <th class="centrado">
+                                                    Pasaporte
+                                                </th>
+                                                <th class="centrado">
+                                                    Carnét de identidad
+                                                </th>
+                                                <th class="centrado">
+                                                    Fecha<br>de<br>inserción
+                                                </th>
+                                                 <th class="centrado">
+                                                     Estado<br>de<br>cliente
+                                                </th>
+                                                  <th class="centrado">
+                                                     País
+                                                </th>
+                                                <th class="centrado">
+                                                    Fecha de<br>certifico<br>de<br>inmigración
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for cliente in clientes %}
+                                                <tr>
+                                                    <td class="centrado">{% if cliente.nombre %}{{ cliente.nombre }}{% else %}-{% endif %}</td>
+                                                    <td class="centrado">{% if cliente.primerApellido %}{{ cliente.primerApellido }}{% else %}-{% endif %}</td>
+                                                    <td class="centrado">{% if cliente.segundoApellido %}{{ cliente.segundoApellido }}{% else %}-{% endif %}</td>
+                                                   
+                                                    <td class="centrado">{% if cliente.pasaporte %}{{ cliente.pasaporte }}{% else %}-{% endif %}</td>
+                                                    <td class="centrado">{% if cliente.carnetIdentidad %}{{ cliente.carnetIdentidad }}{% else %}-{% endif %}</td>
+                                                     <td class="centrado">{% if cliente.fechaInsercion %}{{ cliente.fechaInsercion | date ('d/m/Y')}}{% else %}-{% endif %}</td>        
+                                                     <td class="centrado">{% if cliente.estadoCliente %}{{ cliente.estadoCliente }}{% else %}-{% endif %}</td>
+                                                    <td class="centrado">{% if cliente.pais %}{{ cliente.pais }}{% else %}-{% endif %}</td>
+                                                     <td class="centrado">{% if cliente.fechaCertificoInmigracion %}{{ cliente.fechaCertificoInmigracion | date ('d/m/Y')}}{% else %}-{% endif %}</td>        
+                                                 
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{asset('js/deleteconfig.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/media/js/jquery.dataTables.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/media/js/table-managed.js')}}"></script>
+{% endblock %}

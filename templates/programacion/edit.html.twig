@@ -1,0 +1,256 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/bootstrap-toastr/toastr.min.css')}}"/> 
+      <link href="{{ asset('plugins/datetimepicker/bootstrap-datetimepicker.min.css')}}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+{% block rootmenuprogramaciones %}
+    class="start active open"
+{% endblock %}
+{% block body %}
+    <div class="page-content-wrapper">
+        <div class="page-content">
+            <div class="page-bar">
+                <ul class="page-breadcrumb">
+                    <li>
+                        <i class="fa fa-home"></i>
+                        <a href="#">Inicio</a>
+                        <i class="fa fa-angle-right"></i>
+                    </li>
+                    <li>
+                        <a href="{{ path('programacion_index') }}">Programaciones</a>
+                        <i class="fa fa-angle-right"></i>
+                        <a href="#">Modificar</a> 
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tabbable tabbable-custom boxless tabbable-reversed">
+                        <div class="tab-content">
+                            {{ form_start(form, {'attr': {'class': 'form-horizontal','novalidate':'novalidate' }}) }}
+                            <div class="tab-pane active" id="tab_0">
+                                <div class="portlet light bg-inverse">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="font-red-sunglo"></i>
+                                            <span class="caption-subject font-red-sunglo bold">Modificar programación</span>
+                                            <span class="caption-helper"></span>
+                                        </div>
+                                        <div class="actions btn-set">
+                                            <button type="button" class="btn default" id="volveratras"><i class="fa fa-angle-double-left"></i> Volver atrás</a></button>
+                                            <button class="btn green" {{ form_widget(form.Guardar)}}</button>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body form">
+                                        <div class="form-body"> 
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group {% if form.numeroDesglose.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-4 control-label">Número de desglose:<span class="required"> *</span></label>
+                                                        <div class="col-md-8">
+                                                            {{ form_widget(form.numeroDesglose, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.numeroDesglose.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.numeroDesglose)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group {% if form.numeroManifiesto.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-4 control-label">Número de manifiesto:<span class="required"> *</span></label>
+                                                        <div class="col-md-8">
+                                                            {{ form_widget(form.numeroManifiesto, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.numeroManifiesto.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.numeroManifiesto)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group {% if form.contenedor.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-4 control-label">Contenedor:<span class="required"> *</span></label>
+                                                        <div class="col-md-8">
+                                                            {{ form_widget(form.contenedor, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.contenedor.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.contenedor)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>  
+                                                    <div class="form-group {% if form.transitario.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-4 control-label">Transitario:<span class="required"> *</span></label>
+                                                        <div class="col-md-8">
+                                                            {{ form_widget(form.transitario, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.transitario.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.transitario)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>     
+                                                    <div class="form-group {% if form.naviera.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-4 control-label">Naviera:<span class="required"> *</span></label>
+                                                        <div class="col-md-8">
+                                                            {{ form_widget(form.naviera, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.naviera.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.naviera)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>     
+                                                    <div class="form-group {% if form.tipoContenedor.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-4 control-label">Tipo de contenedor:<span class="required"> *</span></label>
+                                                        <div class="col-md-8">
+                                                            {{ form_widget(form.tipoContenedor, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.tipoContenedor.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.tipoContenedor)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>  
+                                                           <div class="form-group {% if form.observaciones.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-4 control-label">Observaciones:<span class="required"> *</span></label>
+                                                        <div class="col-md-8">
+                                                            {{ form_widget(form.observaciones, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.observaciones.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.observaciones)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group {% if form.cliente.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-4 control-label">Cliente:<span class="required"> *</span></label>
+                                                        <div class="col-md-8">
+                                                            {{ form_widget(form.cliente, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.cliente.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.cliente)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                           <div class="form-group {% if form.deposito.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-4 control-label">Depósito:<span class="required"> *</span></label>
+                                                        <div class="col-md-8">
+                                                            {{ form_widget(form.deposito, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.deposito.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.deposito)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                           <div class="form-group {% if form.bultos.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-4 control-label">Bultos:<span class="required"> *</span></label>
+                                                        <div class="col-md-8">
+                                                            {{ form_widget(form.bultos, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.deposito.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.deposito)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group  {% if form.fechaArriboMariel.vars.valid==false %}has-error{% endif %}">
+                                                        <div class="input text required">
+                                                            <label class="col-md-4 control-label">Fecha de arribo mariel:<span class="required"> *</span></label>
+                                                            <div class="col-md-8">
+                                                                <div class='input-group date' id='datetimepicker1'>
+                                                                    {{form_widget(form.fechaArriboMariel, {'attr': {'class' : 'form-control'}})}}
+                                                                    <span class="input-group-addon">
+                                                                        <span class="fa fa-calendar"></span>
+                                                                    </span> 
+                                                                </div>
+                                                                {% if form.fechaArriboMariel.vars.valid==false %}
+                                                                    <span class="help-block">{{ form_errors(form.fechaArriboMariel)}}</span>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div> 
+                                                    </div> 
+                                                    <div class="form-group  {% if form.fechaEntregadoAduana.vars.valid==false %}has-error{% endif %}">
+                                                        <div class="input text required">
+                                                            <label class="col-md-4 control-label">Fecha de entregado aduana:<span class="required"> *</span></label>
+                                                            <div class="col-md-8">
+                                                                <div class='input-group date' id='datetimepicker2'>
+                                                                    {{form_widget(form.fechaEntregadoAduana, {'attr': {'class' : 'form-control'}})}}
+                                                                    <span class="input-group-addon">
+                                                                        <span class="fa fa-calendar"></span>
+                                                                    </span> 
+                                                                </div>
+                                                                {% if form.fechaEntregadoAduana.vars.valid==false %}
+                                                                    <span class="help-block">{{ form_errors(form.fechaEntregadoAduana)}}</span>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div> 
+                                                    </div> 
+                                                    <div class="form-group  {% if form.fechaDespachar.vars.valid==false %}has-error{% endif %}">
+                                                        <div class="input text required">
+                                                            <label class="col-md-4 control-label">Fecha despachar:<span class="required"> *</span></label>
+                                                            <div class="col-md-8">
+                                                                <div class='input-group date' id='datetimepicker3'>
+                                                                    {{form_widget(form.fechaDespachar, {'attr': {'class' : 'form-control'}})}}
+                                                                    <span class="input-group-addon">
+                                                                        <span class="fa fa-calendar"></span>
+                                                                    </span> 
+                                                                </div>
+                                                                {% if form.fechaDespachar.vars.valid==false %}
+                                                                    <span class="help-block">{{ form_errors(form.fechaDespachar)}}</span>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div> 
+                                                    </div> 
+                                                                <div class="form-group {% if form.detalleCarga.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-4 control-label">Detalle de carga:<span class="required"> *</span></label>
+                                                        <div class="col-md-8">
+                                                            {{ form_widget(form.detalleCarga, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.detalleCarga.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.detalleCarga)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>       
+                                    {{ form_end(form) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}   
+    <script src="{{ asset('plugins/bootstrap-toastr/toastr.min.js')}}"></script> 
+    <script src="{{ asset('validations/programacion.js')}}"></script>
+    <script>
+        $("#volveratras").click(function ()
+        {
+            location.href = "{{ path('programacion_index') }}";
+        })
+            $('#datetimepicker1').datetimepicker({
+            //minDate: moment().millisecond(0).second(0).minute(0).hour(0),
+            format: 'DD/MM/YYYY',
+            locale: 'es'})
+            $('#datetimepicker2').datetimepicker({
+            //minDate: moment().millisecond(0).second(0).minute(0).hour(0),
+            format: 'DD/MM/YYYY',
+            locale: 'es'})
+            $('#datetimepicker3').datetimepicker({
+            //minDate: moment().millisecond(0).second(0).minute(0).hour(0),
+            format: 'DD/MM/YYYY',
+            locale: 'es'})
+    </script>
+{% endblock %}

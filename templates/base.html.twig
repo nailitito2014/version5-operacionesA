@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Operaciones Aduana{% endblock %}</title>
+        {% block stylesheets %}
+            <link href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css"/>
+            <link href="{{ asset('plugins/simple-line-icons/simple-line-icons.min.css') }}" rel="stylesheet" type="text/css"/>
+            <link href="{{ asset('plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
+            <link href="{{ asset('plugins/uniform/css/uniform.default.css') }}" rel="stylesheet" type="text/css"/>
+            <link href="{{ asset('css/components.css') }}" rel="stylesheet" type="text/css"/>
+            <link href="{{ asset('css/plugins.css') }}" rel="stylesheet" type="text/css"/>
+            <link href="{{ asset('css/layout/css/layout.css') }}" rel="stylesheet" type="text/css"/>
+            <link href="{{ asset('css/login.css') }}" rel="stylesheet" type="text/css"/>
+            <link href="{{ asset('css/estilo.css') }}" rel="stylesheet" type="text/css"/>
+            <link href="{{ asset('css/layout/css/themes/light2.css') }}" rel="stylesheet" type="text/css" id="style_color"/>
+            <link href="{{ asset('css/layout/css/custom.css') }}" rel="stylesheet" type="text/css"/>
+            <link href="{{ asset('plugins/datetimepicker/bootstrap-datetimepicker.min.css')}}" rel="stylesheet" type="text/css"/>
+            <link href="{{ asset('plugins/bootstrap-switch/css/bootstrap-switch.min.css') }}" rel="stylesheet" type="text/css"/>
+
+
+        {% endblock %}
+    </head>
+    <body class="page-header-fixed page-quick-sidebar-over-content">
+        <div class="page-header navbar navbar-fixed-top">
+
+            <h3 class="page-title" style="text-align: center;font-size: 25px;margin-left: 230px;">
+             <!--img src="{{asset('inicio.png')}}"/>--><b>GESTION CARGA NO COMERCIAL</b><small></small>
+            </h3>
+            <div class="page-header-inner">
+
+                <div class="page-logo" style="background: #428bca;">
+                    <img src="{{asset('logo.jpg')}}" style="width: 47%;"/><small></small>
+
+                    <a href="#" style="color: #FFFF00 !important;">
+
+                    </a>
+                    <div class="menu-toggler sidebar-toggler hide">
+                    </div>
+                </div>
+                <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+                </a>
+                <div class="top-menu">
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="dropdown dropdown-user">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <span class="username username-hide-on-mobile">
+                                    {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+                                        Bienvenido {{ app.user.nombre }} | ({{app.user.rol.nombreLegible}})
+
+                                    {% endif %}
+                                </span>
+                                {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+                                    <i class="fa fa-angle-down"></i>
+                                {% endif %}
+                            </a>
+                            {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="{{path('system_seguridad_logout')}}">
+                                            <i class="fa fa-sign-out"></i> Cerrar sesión </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{path('usuario_cambiarpassword_cliente', {'id' : app.user.id })}}">
+                                            <i class="icon-key"></i> Cambiar contraseña </a>
+                                    </li>
+                                </ul>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix">
+    </div>
+    <div class="page-container">
+        <div class="page-sidebar-wrapper">
+            <div class="page-sidebar navbar-collapse collapse">
+                <ul class="page-sidebar-menu" data-auto-scroll="true" data-slide-speed="200">
+                    <li class="sidebar-toggler-wrapper" style="margin-bottom: 20px">
+                        <div class="sidebar-toggler">
+                            <div class="number" style="position: relative; left: 473%; font-size: 29px; color: #777474; top: 12px;">{{ app.request.session.get('entidad_nombre')}}</div>
+                        </div>
+                    </li>
+                    <li {% block rootmenuhome %} {% endblock %}>
+                        <a href="{{ path('inicio_index') }}">
+                            <i class="icon-home"></i>
+                            <span class="title">Inicio</span>
+                            {% block rootmenuhomeaux %} {% endblock %}
+                        </a>
+                    </li>
+                    <li {% block rootmenunomencladores %} {% endblock %}>
+                        <a href="javascript:;">
+                            <i class="fa fa-th-list"></i>
+                            <span class="title">Nomencladores</span>
+                            <span class="arrow {% block rootmenunomencladorarrow %} {% endblock %}"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li {% block rootmenucondicionescompra %} {% endblock %}>
+                                <a href="{{ path('condicion_compra_index') }}">
+                                    <i class="icon-list"></i> Condiciones de compra
+                                </a>
+                            </li> 
+                            <li {% block rootmenutiposservicio %} {% endblock %}>
+                                <a href="{{ path('tipo_servicio_index') }}">
+                                    <i class="icon-list"></i> Tipos de servicio
+                                </a>
+                            </li>   
+                            <li {% block rootmenutiposmoneda %} {% endblock %}>
+                                <a href="{{ path('tipo_moneda_index') }}">
+                                    <i class="icon-list"></i> Tipos de moneda
+                                </a>
+                            </li> 
+                            <li {% block rootmenutiposcontenedor %} {% endblock %}>
+                                <a href="{{ path('tipo_contenedor_index') }}">
+                                    <i class="icon-list"></i> Tipos de contenedor
+                                </a>
+                            </li> 
+                            <li {% block rootmenucategoriascliente %} {% endblock %}>
+                                <a href="{{ path('categoria_cliente_index') }}">
+                                    <i class="icon-list"></i> Categorías de cliente
+                                </a>
+                            </li>
+                            <li {% block rootmenutiposcontrato %} {% endblock %}>
+                                <a href="{{ path('tipo_contrato_index') }}">
+                                    <i class="icon-list"></i> Tipos de contrato
+                                </a>
+                            </li>
+                            <li {% block rootmenutransitarios %} {% endblock %}>
+                                <a href="{{ path('transitario_index') }}">
+                                    <i class="icon-list"></i> Transitarios
+                                </a>
+                            </li>
+                            <li {% block rootmenuviastransportacion %} {% endblock %}>
+                                <a href="{{ path('via_transportacion_index') }}">
+                                    <i class="icon-list"></i> Vias de transportación
+                                </a>
+                            </li> 
+                            <li {% block rootmenuviasrecepcion %} {% endblock %}>
+                                <a href="{{ path('via_recepcion_index') }}">
+                                    <i class="icon-list"></i> Vias de recepción
+                                </a>
+                            </li> 
+                            <li {% block rootmenuestadosservicio %} {% endblock %}>
+                                <a href="{{ path('estado_servicio_index') }}">
+                                    <i class="icon-list"></i> Estados de servicio
+                                </a>
+                            </li> 
+                            <li {% block rootmenunavieras %} {% endblock %}>
+                                <a href="{{ path('naviera_index') }}">
+                                    <i class="icon-list"></i> Navieras
+                                </a>
+                            </li> 
+                            <li {% block rootmenupuertos %} {% endblock %}>
+                                <a href="{{ path('puerto_index') }}">
+                                    <i class="icon-list"></i> Puertos
+                                </a>
+                            </li>
+                            <li {% block rootmenupaises %} {% endblock %}>
+                                <a href="{{ path('pais_index') }}">
+                                    <i class="icon-list"></i> Países
+                                </a>
+                            </li>  
+                            <li {% block rootmenuprovincias %} {% endblock %}>
+                                <a href="{{ path('provincia_index') }}">
+                                    <i class="icon-list"></i> Provincias
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li {% block rootmenusolicitudesServicio %} {% endblock %}>
+                        <a href="{{ path('solicitud_servicio_index') }}">
+                            <i class="fa fa-folder-o"></i>
+                            <span class="title">Solicitudes de servicio</span>
+                            {% block rootmenusolicitudServicioaux %} {% endblock %}
+                        </a>
+                    </li>
+                    <li {% block rootmenuclientes %} {% endblock %}>
+                        <a href="{{ path('cliente_index') }}">
+                            <i class="icon-users"></i>
+                            <span class="title">Clientes</span>
+                            {% block rootmenuclienteaux %} {% endblock %}
+                        </a>
+                    </li>
+                    <li {% block rootmenucontratos %} {% endblock %}>
+                        <a href="{{ path('contrato_index') }}">
+                            <i class="icon-folder"></i>
+                            <span class="title">Contratos</span>
+                            {% block rootmenucontratoaux %} {% endblock %}
+                        </a>
+                    </li>
+
+
+                    <li {% block rootmenuGestionesManifiesto %} {% endblock %}>
+                        <a href="javascript:;">
+                            <i class="fa fa-file-o"></i>
+                            <span class="title">Gestiones de Manifiesto</span>
+                            <span class="arrow {% block rootmenugestionesmanifiestoarrow %} {% endblock %}"></span>
+                        </a>
+                        <ul class="sub-menu">   
+                            <li {% block rootmenudesgloseManifiesto %} {% endblock %}>
+                                <a href="{{ path('desglose_manifiesto_index') }}">
+                                    <i class="icon-list"></i>
+                                    <span class="title">Desgloses de manifiesto</span>
+                                    {% block rootmenudesglosesManifiestoaux %} {% endblock %}
+                                </a>
+                            </li>
+                            <li {% block rootmenurectificacionesDesglosesManifiesto %} {% endblock %}>
+                                <a href="{{ path('rectificacion_desglose_manifiesto_index') }}">
+                                    <i class="icon-list"></i>
+                                    <span class="title">Rectificaciones de desgloses de manifiesto</span>
+                                    {% block rootmenurectificacionesdesglosesManifiestoaux %} {% endblock %}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li {% block rootmenuImportacionesExportacionesExtranjeras %} {% endblock %}>
+                        <a href="javascript:;">
+                            <i class="fa fa-folder-open-o"></i>
+                            <span class="title">Servicios Importación Exportación Extranjeras</span>
+                            <span class="arrow {% block rootmenuimportacionesexportacionesarrow %}{% endblock %}"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li {% block rootmenubuques %} {% endblock %}>
+                                <a href="{{ path('buque_index') }}">
+                                    <i class="icon-list"></i> Buques
+                                </a>
+                            </li> 
+                            <li {% block rootmenucontenedores %} {% endblock %}>
+                                <a href="{{ path('contenedor_index') }}">
+                                    <i class="icon-list"></i> Contenedores
+                                </a>
+                            </li>
+                            <li {% block rootmenuimportaciones %} {% endblock %}>
+                                <a href="{{ path('importacion_index') }}">
+                                    <i class="icon-list"></i> Importaciones 
+                                </a>
+                            </li>
+                            <li {% block rootmenuexportaciones %} {% endblock %}>
+                                <a href="{{ path('exportacion_index') }}">
+                                    <i class="icon-list"></i> Exportaciones
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li {% block rootmenuimportacioncubanos %} {% endblock %}>
+                        <a href="javascript:;">
+                            <i class="fa fa-file-o"></i>
+                            <span class="title">Servicios Importación Cubanos</span>
+                            <span class="arrow {% block rootmenuimportacionescubanosarrow %} {% endblock %}"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li {% block rootmenuimportacionescubanos %} {% endblock %}>
+                                <a href="{{ path('importa_cubano_index') }}">
+                                    <i class="icon-list"></i> Importaciones cubanas
+                                </a>
+                            </li>
+                            <li {% block rootmenuexpedientes %} {% endblock %}>
+                                <a href="{{ path('expediente_index') }}">
+                                    <i class="icon-list"></i> Expedientes
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li {% block rootmenuprogramaciones %} {% endblock %}>
+                        <a href="{{ path('programacion_index') }}">
+                            <i class="fa fa-folder-open-o"></i> Programaciones
+                        </a>
+                    </li>
+                    <li {% block rootmenusuario %} {% endblock %}>
+                        <a href="{{ path('user_index') }}">
+                            <i class="icon-users"></i>
+                            <span class="title">Usuarios</span>
+                            {% block rootmenusuarioaux %} {% endblock %}
+                        </a>
+                    </li>
+                    <li {% block rootmenubasesDatos %} {% endblock %}>
+                        <a href="javascript:;">
+                            <i class="fa fa-database"></i>
+                            <span class="title">Base de datos</span>
+                            <span class="arrow {% block rootmenubasedatoarrow %} {% endblock %}"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li {% block rootmenusalvarBD %} {% endblock %}>
+                                <a href="{{ path('base_datos_salvar') }}">
+                                    <i class="icon-list"></i>
+                                    Salvar
+                                </a>
+                            </li>
+                            <li {% block rootmenuRestaurarBD %} {% endblock %}>
+                                <a href="{{ path('base_datos_cargar') }}">
+                                    <i class="icon-list"></i>
+                                    Restaurar</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li {% block rootmenutrazas %} {% endblock %}>
+                        <a href="javascript:;">
+                            <i class="fa fa-male"></i>
+                            <span class="title">Trazas</span>
+                            {% block rootmenutrazaaux %} {% endblock %}
+                            <span class="arrow {% block rootmenutrazaarrow %} {% endblock %}"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li {% block rootmenutrazasPorFecha %} {% endblock %}>
+                                <a href="{{ path('cliente_index') }}">
+                                    <i class="icon-list"></i>
+                                    Por fecha</a>
+                            </li>
+                            <li {% block rootmenutrazasPorUsuario %} {% endblock %}>
+                                <a href="{{ path('cliente_index') }}">
+                                    <i class="icon-list"></i>
+                                    Por usuario</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li {% block rootmenureportes %} {% endblock %}>
+                        <a href="javascript:;">
+                            <i class="icon-folder"></i>
+                            <span class="title">Reportes</span>
+                            {% block rootmenureporteaux %} {% endblock %}
+                            <span class="arrow {% block rootmenureportearrow %} {% endblock %}"></span>      
+                        </a>
+                        <ul class="sub-menu">
+                            <li {% block rootmenureportesclientes %} {% endblock %}>
+                                <a href="javascript:;">
+                                    <i class="fa fa-users"></i> Generales 
+                                    {% block rootmenuclientesaux %} {% endblock %}
+                                    <span class="arrow {% block rootmenuclientesarrow %} {% endblock %}"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <a href="javascript:;"></a>       
+                                    <li {% block rootmenuingresosclientes %} {% endblock %}>
+                                        <a href="{{ path('cliente_index') }}">
+                                            <i class="icon-list"></i> Visualizar estados de los servicios de importacion
+                                        </a>
+                                    </li>
+                                    <li {% block rootmenuserviciosExportacion %} {% endblock %}>
+                                        <a href="{{ path('cliente_index') }}">
+                                            <i class="icon-list"></i> Visualizar estados de los servicios de exportacion
+                                        </a>
+                                    </li>
+                                    <li {% block rootmenuserviciosImportacionCubano %} {% endblock %}>
+                                        <a href="{{ path('cliente_index') }}">
+                                            <i class="icon-list"></i> Visualizar estados de los servicios de importacion cubanos
+                                        </a>
+                                    </li>
+                                    <li  {% block rootmenupagosrealizados %} {% endblock %}>
+                                        <a href="{{ path('cliente_index') }}"> 
+                                            <i class="icon-list"></i> Resumen mensual de servicios iniciados
+                                        </a>
+                                    </li>
+                                    <li  {% block rootmenuserviciosTerminados %} {% endblock %}>
+                                        <a href="{{ path('cliente_index') }}"> 
+                                            <i class="icon-list"></i> Resumen mensual de servicios terminados
+                                        </a>
+                                    </li>
+                                    <li {% block rootmenupagospendientes %} {% endblock %}>
+                                        <a href="#"> 
+                                            <i class="icon-list"></i> Informes estadisticos movimiento contenedores
+                                        </a>
+                                    </li>
+                                    <li {% block rootmencontratosproximosvencer %} {% endblock %}>
+                                        <a href="#"> 
+                                            <i class="icon-list"></i> Contratos próximos a vencer
+                                        </a>
+                                    </li>
+                                    <li {% block rootmencertificosproximosvencer %} {% endblock %}>
+                                        <a href="#"> 
+                                            <i class="icon-list"></i> Certificos estados migratorios próximos a vencer
+                                        </a>
+                                    </li>
+
+
+                                </ul>
+                            </li>
+                            <a href="javascript:;">
+                                <li {% block rootmenubusquedas %} {% endblock %}>
+                                    <i class="fa fa-codepen"></i> Búsquedas
+                                    {% block rootmenubusquedasaux %} {% endblock %}
+                                    <span class="arrow {% block rootmenubusquedasarrow %} {% endblock %}"></span>      
+                            </a>
+                            <ul class="sub-menu">
+
+                                <li {% block rootmenubusquedasPorCliente %} {% endblock %}>
+                                    <a href="{{ path('busqueda_por_cliente') }}"> Búsquedas por cliente</a>
+                                </li>
+                                <li {% block rootmenubusquedasPorExpediente %} {% endblock %}>
+                                    <a href="#"> Búsquedas por expediente</a>
+                                </li>
+                                <li {% block rootmenubusquedasPorContenedor %} {% endblock %}>
+                                    <a href="#"> Búsquedas por contenedores</a>
+                                </li>
+                                <li {% block rootmenubusquedasPorSolicitudesServicio %} {% endblock %}>
+                                    <a href="#"> Búsquedas por solicitudes de servicio</a>
+                                </li>
+                                <li {% block rootmenubusquedasPorContrato %} {% endblock %}>
+                                    <a href="#"> Búsquedas por contrato</a>
+                                </li>
+                                <li {% block rootmenubusquedasPorImportacionesExtranjeras %} {% endblock %}>
+                                    <a href="#"> Búsquedas por importaciones</a>
+                                </li>
+                                <li {% block rootmenubusquedasPorExportaciones %} {% endblock %}>
+                                    <a href="#"> Búsquedas por exportaciones</a>
+                                </li>
+                                <li {% block rootmenubusquedasPorImportacionesCubanas %} {% endblock %}>
+                                    <a href="#"> Búsquedas por importaciones cubanas</a>
+                                </li>
+                                <li {% block rootmenubusquedasPorDesglosesManifiesto %} {% endblock %}>
+                                    <a href="#"> Búsquedas por desgloses de manifiesto</a>
+                                </li>
+                                <li {% block rootmenubusquedasPorRectificacionDesglosesManifiesto %} {% endblock %}>
+                                    <a href="#"> Búsquedas por rectificacion de desgloses de manifiesto</a>
+                                </li>
+                            </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <li {% block rootmenureportesGraficos %} {% endblock %}>
+                                <i class="icon-bar-chart"></i> Gráficos
+                                {% block rootmenureportegraficoaux %} {% endblock %}
+                                <span class="arrow {% block rootmenureportegraficoarrow %} {% endblock %}"></span>      
+                        </a>
+                        <ul class="sub-menu">
+                            <li {% block rootmenucantidadordenesrealizadasporcliente %} {% endblock %}>
+                                <a href="{{ path('cliente_index') }}">Cantidad de órdenes realizadas por cliente</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="page-content-wrapper">    
+            {% block body %}
+                <div class="page-content">
+                    <h3 class="page-title" style="text-align: center;">
+                       <!--img src="{{asset('inicio.png')}}"/>--> Sistema de Gestión de Carga no Comercial  <small></small>
+                    </h3>
+                </div> 
+            {% endblock %}
+            <div class="page-footer" style="background-image: url('{{ asset('img/1.jpg') }}')">
+                <div class="page-footer-inner">
+                    {{ ('today') | date('Y') }} Sistema de Gestión de Carga no Comercial
+                </div>
+                <div class="page-footer-tools">
+                    <span class="go-top">
+                        <i class="fa fa-angle-up"></i>
+                    </span>
+                </div>
+            </div>
+            {% block javascripts %}
+            </div>
+        </div>
+        <script src="{{ asset('datetimepicker/moment.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/jquery-1.11.1.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/jquery-1.11.0.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/jquery.blockui.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/jquery.cokie.min.js') }}" type="text/javascript"></script>
+        <script type="text/javascript"  src="{{ asset('datetimepicker/moment.min.js') }}"></script>
+        <script type="text/javascript"  src="{{ asset('datetimepicker/moment-with-locales.js') }}"></script>
+        <script type="text/javascript"  src="{{ asset('datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
+        <script src="{{ asset('js/jquery-migrate-1.2.1.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('plugins/jquery-slimscroll/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('plugins/uniform/jquery.uniform.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/metronic.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('css/layout/scripts/layout.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}" type="text/javascript"></script>
+
+        <script>
+            jQuery(document).ready(function () {
+                Metronic.init();
+                Layout.init();
+            {% block document_ready %} {% endblock %}
+            });
+        </script>
+
+
+    {% endblock %}
+</body>
+</html>

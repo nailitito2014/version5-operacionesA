@@ -1,0 +1,62 @@
+.select2-container-multi .select2-choices {
+            background-color: #FFFFFF;
+            background-image: none;
+            border: 1px solid #CCCCCC;
+            border-radius: 4px 4px 4px 4px;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+            color: #555555;
+            display: compact;
+            font-size: 12px;
+            line-height: 1.42857;
+            /*padding: 5px 10px;*/
+            transition: border-color 0.25s ease-in-out 0s, box-shadow 0.25s ease-in-out 0s;
+            -moz-transition: border-color 0.25s ease-in-out 0s, box-shadow 0.25s ease-in-out 0s;
+            -o-transition: border-color 0.25s ease-in-out 0s, box-shadow 0.25s ease-in-out 0s;
+            -webkit-transition: border-color 0.25s ease-in-out 0s, box-shadow 0.25s ease-in-out 0s;
+            margin-bottom: 10px;
+
+        }
+
+        
+
+        #select2-drop-mask form ul li {
+            color: black !important;
+        }
+
+        input[type= "text"], input[type= "password"], input[type="email"]{
+            width: 100% !important;
+        }
+		
+        label {
+            display: inline-block;
+            font-weight: normal;
+            margin-bottom: 10px;
+            max-width: 100%;
+            color: #131413;
+            width: 100%;
+        }
+
+
+        input[type="text"], select, input[type="password"] , input[type="email"] {
+            background-color: #FFFFFF;
+            background-image: none;
+            border: 1px solid #CCCCCC;
+            border-radius: 4px 4px 4px 4px;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+            color: #555555;
+            display: compact;
+            font-size: 14px;
+            line-height: 1.42857;
+            padding: 5px 10px;
+            transition: border-color 0.25s ease-in-out 0s, box-shadow 0.25s ease-in-out 0s;
+            -moz-transition: border-color 0.25s ease-in-out 0s, box-shadow 0.25s ease-in-out 0s;
+            -o-transition: border-color 0.25s ease-in-out 0s, box-shadow 0.25s ease-in-out 0s;
+            -webkit-transition: border-color 0.25s ease-in-out 0s, box-shadow 0.25s ease-in-out 0s;
+            margin-bottom: 10px;
+        }
+        input[type="text"]:focus, input[type="email"]:focus, input[type="url"]:focus, textarea:focus, select:focus, input:focus, input[type="password"]:focus {
+            outline: 0 none;
+        }
+        input[type="text"]:focus:invalid, input[type="password"]:focus:invalid, input[type="email"]:focus:invalid, input[type="url"]:focus:invalid, textarea:focus:invalid, select:focus:invalid {
+            outline: 0 none;
+        }

@@ -1,0 +1,343 @@
+{% extends 'base.html.twig' %}
+{% block rootmenuImportacionesExportacionesExtranjeras %}
+    class="start active open"
+{% endblock %}
+{% block rootmenuimportacionesexportacionesarrow %}
+    open
+{% endblock %}
+{% block rootmenuimportaciones %} class="active" {% endblock %}
+{% block body %}
+    <div class="page-content">
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i>
+                    <a href="#">Inicio</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="{{ path('importacion_index') }}">Importaciones</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>  <a href="#">Detalle</a>  </li>          
+            </ul>
+        </div>
+        <div class="clearfix">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tabbable tabbable-custom boxless tabbable-reversed">
+                    <div class="tab-content">
+                        <div class="portlet-body form">
+                            <!-- BEGIN FORM-->
+                            <div class="form-horizontal" role="form">
+                                <div class="form-body">
+                                    <h3 class="form-section">Importación - {{ importacion  }}</h3>
+                                    <div class="actions btn-set" style="float: right;margin-top: -5px;">
+                                        <button class="btn-warning btn-sm blue" id="modificar">Modificar</button>
+                                        <button type="button" class="btn default btn-sm" id="volveratras">  <i class="fa fa-angle-double-left"></i> Regresar</button>
+                                    </div><br><br>
+                                    <div class="row">
+
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Número de importación</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if importacion.numeroImportacion %}{{ importacion.numeroImportacion }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Condición de compra</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if importacion.condicionCompra %}{{ importacion.condicionCompra }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Estado de servicio</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if importacion.estadoServicio %}{{ importacion.estadoServicio  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Puerto destino</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if importacion.puertoDestino %}{{ importacion.puertoDestino  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Puerto origen</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if importacion.puertoOrigen %}{{ importacion.puertoOrigen  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>   
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Via de transportación</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if importacion.viaTransportacion == 'Maritima' %}<b>Maritima</b><hr>
+                                                                Buque: {% if importacion.buque %}{{ importacion.buque }}{% else %}-{% endif %}
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                Número de viaje: {% if importacion.buque %}{{ importacion.buque.numeroViaje }}{% else %}-{% endif %}
+                                                            {% elseif importacion.viaTransportacion == 'Aerea' %}<b>Aérea</b><hr>
+                                                                Línea: 
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                                                            {%else %}-{% endif %}
+
+                                                        {% endautoescape %}
+
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Contenedor</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if importacion.contenedor %}{{ importacion.contenedor  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                     
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Contrato</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if importacion.contrato %}{{ importacion.contrato  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>               
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Desglose</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if importacion.desgloseManifiesto %}{{ importacion.desgloseManifiesto  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Presupuesto</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            Costo de origen: {% if importacion.costoOrigen %}{{ importacion.costoOrigen }}{% else %}-{% endif %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            Flete: {% if importacion.flete %}{{ importacion.flete }}{% else %}-{% endif %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            Destino: {% if importacion.destino %}{{ importacion.destino }}{% else %}-{% endif %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            Recargo: {% if importacion.recargo %}{{ importacion.recargo }}{% else %}-{% endif %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            Rx: {% if importacion.rx %}{{ importacion.rx }}{% else %}-{% endif %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            Presupuesto total: {% if importacion.presupuesto %}{{ importacion.presupuesto }}{% else %}-{% endif %}
+                                                            {% if importacion.tipoMoneda == 'CUC' %}CUC{% elseif importacion.tipoMoneda == 'CUP' %}CUP{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Fecha estimada de servicio</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if importacion.fechaEstimadoServicio %}{{ importacion.fechaEstimadoServicio | date('d/m/Y')  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                 
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Fecha de salida de embarque</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if importacion.fechaSalidaEmbarque %}{{ importacion.fechaSalidaEmbarque | date('d/m/Y')  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Fecha de arribo</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if importacion.fechaArribo %}{{ importacion.fechaArribo | date('d/m/Y')  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                 
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Fecha estimada de salida</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if importacion.fechaEstimadaSalida %}{{ importacion.fechaEstimadaSalida | date('d/m/Y')  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                   
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Descripción de la carga </strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if importacion.descripcionCarga %}{{ importacion.descripcionCarga }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Dirección destino </strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if importacion.direccionDestino %}{{ importacion.direccionDestino }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Documentos recibidos </strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if importacion.documentosRecibidos %}{{ importacion.documentosRecibidos }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                   
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Detalles de servicios </strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if importacion.detalleServicios %}{{ importacion.detalleServicios }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                   
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Observaciones</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if importacion.observaciones %}{{ importacion.observaciones }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>             
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}   
+    <script>
+        $(document).ready(function () {
+            $(".fancybox").fancybox();
+        });
+        $("#volveratras").click(function ()
+        {
+            location.href = "{{ path('importacion_index') }}";
+        })
+        $("#modificar").click(function ()
+        {
+            location.href = "{{ path('importacion_edit', {'id' : importacion.id }) }}";
+        })
+    </script>
+{% endblock %}
+
+
+

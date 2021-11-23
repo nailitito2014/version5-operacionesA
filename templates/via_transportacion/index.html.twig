@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ViaTransportacion index{% endblock %}
+
+{% block body %}
+    <h1>ViaTransportacion index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Fecha</th>
+                <th>FechaInsercion</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for via_transportacion in via_transportacions %}
+            <tr>
+                <td>{{ via_transportacion.id }}</td>
+                <td>{{ via_transportacion.nombre }}</td>
+                <td>{{ via_transportacion.fecha ? via_transportacion.fecha|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ via_transportacion.fechaInsercion ? via_transportacion.fechaInsercion|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('via_transportacion_show', {'id': via_transportacion.id}) }}">show</a>
+                    <a href="{{ path('via_transportacion_edit', {'id': via_transportacion.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('via_transportacion_new') }}">Create new</a>
+{% endblock %}

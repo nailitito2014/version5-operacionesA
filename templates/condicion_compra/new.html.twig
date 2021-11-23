@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/bootstrap-toastr/toastr.min.css')}}"/> 
+{% endblock %}
+{% block  rootmenunomencladores %}
+    class="start active open"
+{% endblock %}
+{% block rootmenunomencladoraux %}
+    <span class="selected"></span>
+{% endblock %}
+{% block rootmenunomencladorarrow %}
+    open
+{% endblock %}
+{% block rootmenucondicionescompra %} class="active" {% endblock %}
+{% block body %}
+    <div class="page-content-wrapper">
+        <div class="page-content">
+            <div class="page-bar">
+                <ul class="page-breadcrumb">
+                    <li>
+                        <i class="fa fa-home"></i>
+                        <a href="#">Inicio</a>
+                        <i class="fa fa-angle-right"></i>
+                    </li>
+                    <li>
+                        <a href="{{ path('condicion_compra_index') }}">Condiciones de compra</a>
+                        <i class="fa fa-angle-right"></i>
+                        <a href="#">Nueva</a> 
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tabbable tabbable-custom boxless tabbable-reversed">
+                        <div class="tab-content">
+                            {{ form_start(form, {'attr': {'class': 'form-horizontal','novalidate':'novalidate' }}) }}
+                            <div class="tab-pane active" id="tab_0">
+                                <div class="portlet light bg-inverse">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="font-red-sunglo"></i>
+                                            <span class="caption-subject font-red-sunglo bold">Adicionar condición de compra</span>
+                                            <span class="caption-helper"></span>
+                                        </div>
+                                        <div class="actions btn-set">
+                                            <button type="button" class="btn default" id="volveratras"><i class="fa fa-angle-double-left"></i> Volver atrás</a></button>
+                                            <button class="btn green" {{ form_widget(form.Guardar)}}</button>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body form">
+                                        <div class="form-body"> 
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group {% if form.nombre.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-4 control-label">Condición de compra:<span class="required"> *</span></label>
+                                                        <div class="col-md-5">
+                                                            {{ form_widget(form.nombre, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.nombre.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.nombre)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                        </div>
+                                    </div>       
+                                    {{ form_end(form) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="{{ path('cliente_index') }}">back to list</a>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}   
+    <script src="{{ asset('plugins/bootstrap-toastr/toastr.min.js')}}"></script> 
+    <script src="{{ asset('validations/condicionCompra.js')}}"></script>
+    <script>
+        $("#volveratras").click(function ()
+        {
+            location.href = "{{ path('condicion_compra_index') }}";
+        })
+    </script>
+{% endblock %}

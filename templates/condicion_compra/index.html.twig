@@ -1,0 +1,142 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css')}}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+{% block  rootmenunomencladores %}
+    class="start active open"
+{% endblock %}
+{% block rootmenunomencladoraux %}
+    <span class="selected"></span>
+{% endblock %}
+{% block rootmenunomencladorarrow %}
+    open
+{% endblock %}
+{% block rootmenucondicionescompra %} class="active" {% endblock %}
+{% block body %}
+    <div class="page-content">
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i>
+                    <a href="#">Inicio</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="#">Condiciones de compra</a>
+                </li>
+            </ul>
+        </div>
+        <div class="clearfix">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet box blue-chambray">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-sitemap"></i>Condiciones de compra
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        {% for flashMessage in app.session.flashbag.get('success') %}
+                            <div class="alert alert-success">
+                                {{ flashMessage }}
+                            </div>
+                        {% endfor %}
+                        {% for flashMessage in app.session.flashbag.get('error') %}
+                            <div class="alert alert-danger">
+                                {{ flashMessage }}
+                            </div>
+                        {% endfor %}
+                        <div class="table-toolbar">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <form name="juegos" method="POST" action="{{ path('condicion_compra_index') }}">
+                                        <div class="btn-group">
+                                            <a href="{{ path('condicion_compra_new') }}" class="btn green">
+                                                <i class="fa fa-plus"></i> Adicionar
+                                            </a>
+                                        </div>
+                                        <a class="btn red" id="deleteAllCondicionesCompra" href="javascript:void(0);">
+                                            <i class="fa fa-minus"></i>&nbsp;Eliminar todos</a>      
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <form action="{{ path('condiciones_compra_delete_all') }}" method="POST" id="condicionesCompra">                          
+                            <table class="datatable table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr class="heading">
+                                        <th class="centrado">
+                                            <input type="checkbox" id="selectAllCondicionesCompra"/>
+                                        </th>
+                                        <th class="centrado">
+                                            Condición de compra
+                                        </th>
+                                        <th class="centrado">
+                                            Acciones
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for condicionCompra in condicion_compras %}
+                                        <tr>
+                                            <td class="centrado" style="width: 10%;">
+                                                <input type="checkbox" value="{{ condicionCompra.id }}" name="condicionesCompra[]"/>
+                                            </td>
+                                            <td class="centrado">{% if condicionCompra.nombre %}{{ condicionCompra.nombre }}{% else %}-{% endif %}</td>  
+                                            <td style="width: 40%;"  class="actions-two-button centrado formato">
+                                                <a  href="{{ path('condicion_compra_edit', {'id' : condicionCompra.id })}}" title="Editar">
+                                                    <i class="fa fa-pencil btn btn-sm blue"></i>
+                                                </a>   
+                                                <a class="link-eliminar" href="javascript:void(0)"
+                                                   data-url="{{ path('condicion_compra_delete', { 'id': condicionCompra.id }) }}"
+                                                   data-descripcion="La condición de compra {{ condicionCompra.nombre }} se eliminará del sistema."
+                                                   data-toggle="modal" data-target="#modal-delete" title="Eliminar">
+                                                    <span class="red">
+                                                        <i class="fa fa-trash-o btn btn-sm red"></i>
+                                                    </span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include "modal-delete.html.twig" %}                               
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{asset('js/deleteconfig.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/media/js/jquery.dataTables.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/media/js/table-managed.js')}}"></script>
+
+    <script>
+        $(function () {
+            $("#deleteAllCondicionesCompra").click(function () {
+                $("#condicionesCompra").submit()
+            })
+        });
+        $('#selectAllCondicionesCompra').click(function (event) {
+            if (this.checked) {
+                $(':checkbox').each(function () {
+
+                    this.checked = true;
+                });
+            } else {
+                $(':checkbox').each(function () {
+                    this.checked = false;
+                });
+            }
+        });
+        $(document).ready(function () {
+            $(".fancybox").fancybox();
+        });
+    </script>
+{% endblock %}

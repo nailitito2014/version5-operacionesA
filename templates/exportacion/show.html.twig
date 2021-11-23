@@ -1,0 +1,367 @@
+{% extends 'base.html.twig' %}
+{% block rootmenuImportacionesExportacionesExtranjeras %}
+    class="start active open"
+{% endblock %}
+{% block rootmenuimportacionesexportacionesarrow %}
+    open
+{% endblock %}
+{% block rootmenuexportaciones %} class="active" {% endblock %}
+{% block body %}
+    <div class="page-content">
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i>
+                    <a href="#">Inicio</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="{{ path('exportacion_index') }}">Exportaciones</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>  <a href="#">Detalle</a>  </li>          
+            </ul>
+        </div>
+        <div class="clearfix">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tabbable tabbable-custom boxless tabbable-reversed">
+                    <div class="tab-content">
+                        <div class="portlet-body form">
+                            <!-- BEGIN FORM-->
+                            <div class="form-horizontal" role="form">
+                                <div class="form-body">
+                                    <h3 class="form-section">Exportación - {{ exportacion  }}</h3>
+                                    <div class="actions btn-set" style="float: right;margin-top: -5px;">
+                                        <button class="btn-warning btn-sm blue" id="modificar">Modificar</button>
+                                        <button type="button" class="btn default btn-sm" id="volveratras">  <i class="fa fa-angle-double-left"></i> Regresar</button>
+                                    </div><br><br>
+                                    <div class="row">
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Número de exportación</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if  exportacion.numeroExportacion %}{{ exportacion.numeroExportacion }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Solicitud de servicio</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if exportacion.solicitudServicio %}{{ exportacion.solicitudServicio }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Vía de transportación</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if exportacion.viaTransportacion %}{{ exportacion.viaTransportacion }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>               
+
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Condición de compra</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if exportacion.condicionCompra %}{{ exportacion.condicionCompra }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>             
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Puerto de origen</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if exportacion.puertoOrigen %}{{ exportacion.puertoOrigen }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>               
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Puerto de destino</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if exportacion.puertoDestino %}{{ exportacion.puertoDestino }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Contenedor</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if exportacion.contenedor %}{{ exportacion.contenedor }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Buque</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if exportacion.buque %}{{ exportacion.buque }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Contrato</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if exportacion.contrato %}{{ exportacion.contrato }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Fecha de visita</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if exportacion.fechaVisita %}{{ exportacion.fechaVisita | date ('d/m/Y') }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Costo de origen</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if exportacion.costoOrigen %}{{ exportacion.costoOrigen }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>               
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Costo de origen</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if exportacion.costoOrigen %}{{ exportacion.costoOrigen }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Presupuesto</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            Costo de origen: {% if exportacion.costoOrigen %}{{ exportacion.costoOrigen }}{% else %}-{% endif %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            Flete: {% if exportacion.flete %}{{ exportacion.flete }}{% else %}-{% endif %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            Destino: {% if exportacion.destino %}{{ exportacion.destino }}{% else %}-{% endif %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            Recargo: {% if exportacion.recargo %}{{ exportacion.recargo }}{% else %}-{% endif %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            Rx: {% if exportacion.rx %}{{ exportacion.rx }}{% else %}-{% endif %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            Presupuesto total: {% if exportacion.presupuesto %}{{ exportacion.presupuesto }}{% else %}-{% endif %}
+                                                          {% if exportacion.tipoMoneda == 'CUC' %}CUC{% elseif exportacion.tipoMoneda == 'CUP' %}CUP{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>              
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Descripción de carga</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if exportacion.descripcionCarga %}{{ exportacion.descripcionCarga }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>               
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Dirección de origen</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if exportacion.direccionOrigen %}{{ exportacion.direccionOrigen }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Fecha estimada de servicio</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if exportacion.fechaEstimadoServicio %}{{ exportacion.fechaEstimadoServicio | date('d/m/Y') }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>              
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Fecha salida de embarque</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if exportacion.fechaSalidaEmbarque %}{{ exportacion.fechaSalidaEmbarque | date('d/m/Y') }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Fecha de arribo</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if exportacion.fechaArribo %}{{ exportacion.fechaArribo | date('d/m/Y') }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>             
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Fecha estimada de salida</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if exportacion.fechaEstimadaSalida %}{{ exportacion.fechaEstimadaSalida | date('d/m/Y') }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>             
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Detalle de servicios</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if exportacion.detalleServicios %}{{ exportacion.detalleServicios }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>              
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Observaciones</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if exportacion.observaciones %}{{ exportacion.observaciones }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>             
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Dirección destino</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if exportacion.direccionDestino %}{{ exportacion.direccionDestino }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>             
+
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}   
+    <script>
+        $(document).ready(function () {
+            $(".fancybox").fancybox();
+        });
+        $("#volveratras").click(function ()
+        {
+            location.href = "{{ path('exportacion_index') }}";
+        })
+        $("#modificar").click(function ()
+        {
+            location.href = "{{ path('exportacion_edit', {'id' : exportacion.id }) }}";
+        })
+    </script>
+
+{% endblock %}
+
+
+
+

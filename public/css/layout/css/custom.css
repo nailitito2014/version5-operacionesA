@@ -1,0 +1,251 @@
+/* here you can put your own css to customize and override the theme */
+
+/***
+Rounded Portlets
+***/
+/*
+.portlet {
+	border-radius: 4px !important;
+}
+
+.portlet .portlet-title {
+	border-radius: 4px 4px 0px 0px !important;
+}
+
+.portlet .portlet-body,
+.portlet .portlet-body .form-actions  {
+	border-radius: 0px 0px 4px 4px !important;
+}
+*/
+.front_languages {
+    color: #FFF;
+    text-align: right;
+}
+
+.front_content > h3 {
+    color: #E0C771 !important;
+    text-transform: uppercase;
+    font-size: medium;
+    line-height: 50px;
+    text-indent: 14px;
+    background: transparent url("../../../jl/module_header.png") no-repeat scroll left bottom;
+}
+
+.front_content > div > a {
+    color: #E0C771 !important;
+}
+
+.front_content > div > p > a {
+    color: #E0C771 !important;
+}
+
+.front_content > div > div > p > a {
+    color: #E0C771 !important;
+}
+
+.front_content > div > p > span > a {
+    color: #E0C771 !important;
+}
+
+.front_sidebar {
+    width: 100%;
+    background-color: transparent;
+}
+
+.front_sidebar > li > a {
+    border-top: 0px !important;
+    padding: 3px 15px !important;
+    background-color: transparent;
+    text-align: right;
+}
+
+.front_sidebar > li > a:hover {
+    background-color: transparent !important;
+    color: #E0C771 !important;
+}
+
+.front_sidebar > li.activa > a {
+    color: #E0C771 !important;
+}
+
+.front_sidebar > li > h3 {
+    color: #E0C771 !important;
+    text-transform: uppercase;
+    font-size: medium;
+    line-height: 50px;
+    text-indent: 14px;
+    background: transparent url("../../../jl/module_header.png") no-repeat scroll left bottom;
+}
+
+.front_sidebar > th > h3 {
+    color: #E0C771 !important;
+    text-transform: uppercase;
+    font-size: medium;
+    line-height: 50px;
+    text-indent: 14px;
+    background: transparent url("../../../jl/module_header.png") no-repeat scroll left bottom;
+}
+
+.front_sidebar > li > h3 span {
+    color: #BBBFC4;
+}
+
+.front_right_sidebar1 > li {
+    background: transparent url("../../../jl/separator.png") repeat-x scroll 0px top;
+}
+
+.front_right_sidebar > li.activa {
+    background: none !important;
+}
+
+.front_right_sidebar > li.first {
+    background: none !important;
+}
+
+.front_right_sidebar > li > a {
+    text-align: left !important;
+}
+
+.front_footer {
+    background: transparent url("../../../jl/line.png") repeat-x scroll 0px 0px;
+}
+
+.front_article_preview {
+
+}
+
+.front_article_preview > a {
+    color: #E0C771;
+    font-size: medium;
+    text-transform: uppercase;
+    margin-left: -15px;
+}
+
+.front_article_preview > a:hover {
+    color: #E0C771 !important;
+    text-decoration: none;
+}
+
+.front_article_preview_author {
+    font-size: small;
+    color: #D4D9DE;
+    margin-left: -15px;
+}
+
+.front_article_preview_img {
+    float: left;
+    margin: 2px 15px 4px 0px;
+}
+
+.front_text {
+    color: #D4D9DE !important;
+}
+
+.front_text > p > a {
+    color: #D4D9DE !important;
+}
+
+.front_text > p > span > a {
+    color: #D4D9DE !important;
+}
+
+.front_text > a {
+    color: #D4D9DE !important;
+}
+
+.front_readmore > a {
+    color: #E0C771 !important;
+    text-decoration: none;
+}
+.front_readmore > a:hover {
+    color: #D4D9DE;
+}
+
+.front_article_gallery > h3 {
+    color: #E0C771 !important;
+    text-transform: uppercase;
+    font-size: medium;
+    line-height: 50px;
+}
+
+.accordion-toggle {
+    background: transparent url("../../../jl/line.png") no-repeat scroll left bottom !important;
+}
+
+.accordion .panel .panel-title {
+    color: #E0C771 !important;
+}
+
+.accordion .panel .panel-title > a:hover {
+    color: #E0C771 !important;
+}
+
+.panel {
+    background: #000 !important;
+    color: #D4D9DE;
+}
+
+.panel-default {
+    border-color: #000 !important;
+}
+
+.panel-default > .panel-heading {
+    background-color: #000;
+    color: #D4D9DE;
+}
+
+.panel-default > .panel-heading + .panel-collapse .panel-body {
+    border-top-color: #000;
+}
+
+.panel-body > p > a {
+     color: #D4D9DE !important;
+ }
+
+.panel-body > p > span > a {
+    color: #D4D9DE !important;
+}
+
+.panel-body > ul > li > a {
+    color: #D4D9DE !important;
+}
+
+
+.progress.progress-indeterminate {
+    background-color: transparent;
+}
+
+.progress.progress-indeterminate .bar {
+    display: block;
+    position: static;
+    width: 188px;
+    height: 11px;
+    margin: 4px auto;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    background: transparent url("../../../jl/progress-indeterminate-light.gif") no-repeat 0 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+.win-ui-dark.progress.progress-indeterminate .bar {
+    width: 191px;
+    height: 7px;
+    margin: 9px auto;
+    background: transparent url("../../../jl/progress-indeterminate-dark.gif") no-repeat 0 0;
+}
+
+.progress.progress-indeterminate .win-ring.small {
+    display: inline-block;
+    width: 23px;
+    height: 27px;
+    margin: 4px 10px 5px;
+    background: transparent url("../../../jl/progress-indeterminate-ring-light-small.gif") no-repeat 0 0;
+}
+.win-ui-dark.progress.progress-indeterminate .win-ring.small {
+    width: 24px;
+    height: 23px;
+    margin: 8px 10px 5px;
+    background: transparent url("../../../jl/progress-indeterminate-ring-dark-small.gif") no-repeat 0 0;
+}

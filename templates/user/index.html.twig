@@ -1,0 +1,149 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css')}}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+{% block rootmenusuario %}
+    class="start active open"
+{% endblock %}
+{% block rootmenusuarioaux %}
+    <span class="selected"></span>
+{% endblock %}
+{% block body %}
+    <div class="page-content">
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i>
+                    <a href="#">Inicio</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="#">Usuarios</a>
+                </li>
+            </ul>
+        </div>
+        <div class="clearfix">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet box blue-chambray">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-cogs"></i>Usuarios
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        {% for flashMessage in app.session.flashbag.get('notice') %}
+                            <div class="alert alert-success">
+                                {{ flashMessage }}
+                            </div>
+                        {% endfor %}
+                        {% for flashMessage in app.session.flashbag.get('error') %}
+                            <div class="alert alert-danger">
+                                {{ flashMessage }}
+                            </div>
+                        {% endfor %}
+                        <div class="table-toolbar">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="btn-group">
+                                        <a href="{{ path('user_new') }}" class="btn green">
+                                            <i class="fa fa-plus"></i> Adicionar
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+{#                        <form action="{{ path('user_delete_all') }}" method="POST" id="usuarios">#}
+                            <table class="datatable table table-striped table-bordered table-hover">
+                                <thead>
+                                <tr class="heading">
+
+                                    <th class="centrado">
+                                        Nombre
+                                    </th>
+                                    <th class="centrado">
+                                        Apellidos
+                                    </th>
+                                    <th class="centrado">
+                                        Nombre <br>de usuario
+                                    </th>
+                                    <th class="centrado">
+                                        Rol
+                                    </th>
+                                    <th class="centrado">
+                                        Acciones
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for user in users %}
+                                    <tr>
+
+                                        <td class="centrado">
+                                            {% if user.nombre %}{{ user.nombre }}{% else %}-{% endif %}
+                                        </td>
+                                        <td class="centrado">
+                                            {% if user.primerApellido %}{{ user.primerApellido }} {{ user.segundoApellido }}{% else %}-{% endif %}
+                                        </td>
+                                        <td class="centrado">{{ user.nombreUsuario }}</td>
+                                        <td class="centrado">{{ user.rol }}</td>
+                                        <td style="width: 30%;"  class="actions-two-button centrado formato">
+                                            <a  href="{{ path('user_edit', {'id' : user.id })}}" title="Editar">
+                                                <i class="fa fa-pencil btn btn-sm blue"></i>
+                                            </a>
+                                            <a  href="{{ path('user_cambiarpassword_update', {'id' : usuario.id })}}" title="Cambiar contraseña">
+                                                    <span class="green">
+                                                        <i class="fa fa-key btn btn-sm green-haze"></i>
+                                                    </span>
+                                            </a>
+                                            {% if usuario.rol.nombreLegible  == "Administrador" %}
+                                                <a class="link-eliminar" href="javascript:void(0)" style="display: none;"
+                                                   data-url="{{ path('user_delete', { 'id': user.id }) }}"
+                                                   data-descripcion="El usuario {{ user.nombre }} se eliminará del sistema"
+                                                   data-toggle="modal" data-target="#modal-delete" title="Eliminar">
+                                                    <i class="fa fa-trash-o btn btn-sm red"></i>
+                                                </a>
+                                            {% else %}
+
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{#    {% include "GestionBundle::modal-delete.html.twig" %}#}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{asset('js/deleteconfig.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/media/js/jquery.dataTables.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/media/js/table-managed.js')}}"></script>
+    <script>
+        $(function () {
+            $("#deleteAllUsuarios").click(function () {
+                $("#usuarios").submit()
+            })
+        });
+        $('#selectAllUsuarios').click(function (event) {
+            if (this.checked) {
+                $(':checkbox').each(function () {
+                    this.checked = true;
+                });
+            } else {
+                $(':checkbox').each(function () {
+                    this.checked = false;
+                });
+            }
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,155 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css')}}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+{% block rootmenusolicitudesServicio %}
+    class="start active open"
+{% endblock %}
+{% block body %}
+    <div class="page-content">
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i>
+                    <a href="#">Inicio</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="{{ path('solicitud_servicio_index') }}">Solicitudes de servicio</a>
+                </li>
+            </ul>
+        </div>
+        <div class="clearfix">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet box blue-chambray">                  
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-cogs"></i>Solicitudes de servicio
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        {% for message in app.flashes('success') %}
+                            <div class="alert alert-success">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        {% for message in app.flashes('error') %}
+                            <div class="alert alert-danger">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        <div class="table-toolbar">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="btn-group">
+                                        <a href="{{ path('solicitud_servicio_new') }}" class="btn green">
+                                            <i class="fa fa-plus"></i> Adicionar 
+                                        </a>
+                                    </div>
+                                    <a class="btn red" id="desactivarAllSolicitudesServicio" href="javascript:void(0);">
+                                        <i class="fa fa-arrow-up"></i> Desactivar todas
+                                    </a>
+                                    <button type="submit" class="btn green-meadow" value="pdf" name="PDF">
+                                        <i class="fa fa-file-pdf-o"></i> Exportar a PDF
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <form action="{{ path('solicitudes_servicio_desactivar_todas') }}" method="POST" id="solicitudesServicio">
+                            <table class="datatable table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr class="heading">
+                                        <th class="centrado">
+                                            <input type="checkbox" id="selectAllSolicitudesServicio"/>
+                                        </th>
+                                        <th class="centrado">
+                                            Número<br>de<br>solicitud
+                                        </th>
+                                        <th class="centrado">
+                                            Cliente
+                                        </th>
+                                        <th class="centrado">
+                                            Tipo<br>de<br>servicio
+                                        </th>
+                                        <th class="centrado">
+                                            Fecha<br>de<br>solicitud
+                                        </th>
+                                        <th class="centrado">
+                                            Acciones
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for solicitudServicio in solicitud_servicios %}
+                                        <tr>  
+                                            <td class="centrado">
+                                                <input type="checkbox" value="{{ solicitudServicio.id }}" name="solicitudesServicio[]"/>
+                                            </td>
+                                            <td class="centrado">{% if solicitudServicio.numeroSolicitud %}{{ solicitudServicio.numeroSolicitud }}{% else %}-{% endif %}</td>
+                                            <td class="centrado">{% if solicitudServicio.cliente %}{{ solicitudServicio.cliente }}{% else %}-{% endif %}</td>
+                                            <td class="centrado">{% if solicitudServicio.tipoServicio %}{{ solicitudServicio.tipoServicio }}{% else %}-{% endif %}</td>
+                                            <td class="centrado">{% if solicitudServicio.fechaSolicitud %}{{ solicitudServicio.fechaSolicitud  | date ('d/m/Y')}}{% else %}-{% endif %}</td>
+                                            <td style="width: 40%;"  class="actions-two-button centrado formato">
+                                                <!--<a  href="{{ path('solicitud_servicio_edit', {'id' :  solicitudServicio.id })}}" title="Editar">
+                                                    <i class="fa fa-pencil btn btn-sm blue"></i>
+                                                </a>--> 
+                                                <a  href="{{ path('solicitud_servicio_show', {'id' :  solicitudServicio.id })}}" title="Ver detalle">
+                                                    <i class="fa fa-search-plus btn btn-sm btn-warning"></i>
+                                                </a> 
+                                                    {% if solicitudServicio.solicitudActiva %}
+                                                <a  href="{{ path('desactivar_solicitud_servicio', {'id' :  solicitudServicio.id })}}" title="Desactivar solicitud de servicio">
+                                                    <i class="fa fa-arrow-up btn btn-sm red"></i>
+                                                </a>
+                                                    {% else %}
+                                                        <a  href="#" title="Solicitud de servicio desactivada">
+                                                    <i class="fa fa-arrow-down btn btn-sm red"></i>
+                                                </a>  
+                                                        
+                                                        
+                                                        {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include "modal-delete.html.twig" %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{asset('js/deleteconfig.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/media/js/jquery.dataTables.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/media/js/table-managed.js')}}"></script>
+    <script>
+    
+        $(function () {
+            $("#desactivarAllSolicitudesServicio").click(function () {
+                $("#solicitudesServicio").submit()
+            })
+        });
+        $('#selectAllSolicitudesServicio').click(function (event) {
+            if (this.checked) {
+                $(':checkbox').each(function () {
+
+                    this.checked = true;
+                });
+            } else {
+                $(':checkbox').each(function () {
+                    this.checked = false;
+                });
+            }
+        });
+            $(document).ready(function () {
+            $(".fancybox").fancybox();
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css')}}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+{% block rootmenuprogramaciones %}
+    class="start active open"
+{% endblock %}
+{% block body %}
+    <div class="page-content">
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i>
+                    <a href="#">Inicio</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="#">Programaciones</a>
+                </li>
+            </ul>
+        </div>
+        <div class="clearfix">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet box blue-chambray">                  
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-cogs"></i>Programaciones
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        {% for message in app.flashes('success') %}
+
+                            <div class="alert alert-success">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        {% for message in app.flashes('error') %}
+
+                            <div class="alert alert-danger">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        <div class="table-toolbar">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="btn-group">
+                                        <a href="{{ path('programacion_new') }}" class="btn green">
+                                            <i class="fa fa-plus"></i> Adicionar 
+                                        </a>
+                                    </div>
+                                    <button type="submit" class="btn green-meadow" value="pdf" name="PDF">
+                                        <i class="fa fa-file-pdf-o"></i> Exportar a PDF
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="datatable table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr class="heading">
+                                    <th class="centrado">
+                                        Número de desglose
+                                    </th>
+                                    <th class="centrado">
+                                        Número de manifiesto
+                                    </th>
+                                    <th class="centrado">
+                                        Depósito
+                                    </th>
+                                    <th class="centrado">
+                                        Naviera
+                                    </th>
+                                    <th class="centrado">
+                                        Contenedor
+                                    </th>
+                                    <th class="centrado">
+                                        Fecha<br>de <br>entregado aduana
+                                    </th>
+                                    <th class="centrado">
+                                        Acciones
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for programacion in programaciones %}
+                                    <tr> 
+                                        <td class="centrado">{% if programacion .numeroDesglose %}{{ programacion.numeroDesglose }}{% else %}-{% endif %}</td>
+                                        <td class="centrado">{% if programacion.numeroManifiesto %}{{ programacion.numeroManifiesto }}{% else %}-{% endif %}</td>
+                                        <td class="centrado">{% if programacion.deposito %}{{ programacion.deposito }}{% else %}-{% endif %}</td>
+                                        <td class="centrado">{% if programacion.naviera %}{{ programacion.naviera }}{% else %}-{% endif %}</td>
+                                        <td class="centrado">{% if programacion.contenedor %}{{ programacion.contenedor }}{% else %}-{% endif %}</td>
+                                        <td class="centrado">{% if programacion.naviera %}{{ programacion.naviera }}{% else %}-{% endif %}</td>
+                                        <td style="width: 40%;"  class="actions-two-button centrado formato">
+                                            <a  href="{{ path('programacion_edit', {'id' : programacion.id })}}" title="Editar">
+                                                <i class="fa fa-pencil btn btn-sm blue"></i>
+                                            </a> 
+                                            <a  href="{{ path('programacion_show', {'id' : programacion.id })}}" title="Ver detalle">
+                                                <i class="fa fa-search-plus btn btn-sm btn-warning"></i>
+                                            </a> 
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('plugins/datatables/media/js/jquery.dataTables.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/media/js/table-managed.js')}}"></script>
+    <script>
+        $(document).ready(function () {
+            $(".fancybox").fancybox();
+        });
+    </script>
+{% endblock %}

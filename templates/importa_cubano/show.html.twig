@@ -1,0 +1,208 @@
+{% extends 'base.html.twig' %}
+{% block rootmenuimportacioncubanos %}
+    class="start active open"
+{% endblock %}
+{% block rootmenunomencladoraux %}
+    <span class="selected"></span>
+{% endblock %}
+{% block rootmenuimportacionescubanosarrow %}
+    open
+{% endblock %}
+{% block rootmenuimportacionescubanos %} class="active" {% endblock %}
+{% block body %}
+    <div class="page-content">
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i>
+                    <a href="#">Inicio</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="{{ path('importa_cubano_index') }}">Servicios importacin cubanas</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="{{ path('importa_cubano_index') }}">Importaciones cubanas</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>  <a href="#">Detalle</a>  </li>          
+            </ul>
+        </div>
+        <div class="clearfix">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tabbable tabbable-custom boxless tabbable-reversed">
+                    <div class="tab-content">
+                        <div class="portlet-body form">
+                            <!-- BEGIN FORM-->
+                            <div class="form-horizontal" role="form">
+                                <div class="form-body">
+                                    <h3 class="form-section">Importación cubana - {{ importacionCubana  }}</h3>
+                                    <div class="actions btn-set" style="float: right;margin-top: -5px;">
+                                        <button class="btn-warning btn-sm blue" id="modificar">Modificar</button>
+                                        <button type="button" class="btn default btn-sm" id="volveratras">  <i class="fa fa-angle-double-left"></i> Regresar</button>
+                                    </div><br><br>
+                                    <div class="row">
+
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Número de importación cubana</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if  importacionCubana.numeroImportacionCubano %}{{ importacionCubana.numeroImportacionCubano }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Número de manifiesto</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if importacionCubana.numeroManifiesto %}{{ importacionCubana.numeroManifiesto }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Contenedor</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if importacionCubana.contenedor %}{{ importacionCubana.contenedor  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Desglose de manifiesto</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if importacionCubana.desgloseManifiesto %}{{ importacionCubana.desgloseManifiesto  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Transitario</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if importacionCubana.transitario %}{{ importacionCubana.transitario  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>País de procedencia</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if importacionCubana.paisProcedencia %}{{ importacionCubana.paisProcedencia }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Solicitud de servicio</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if importacionCubana.solicitudServicio %}{{ importacionCubana.solicitudServicio  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                     
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Fecha de entrega en aduana</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if importacionCubana.fechaEntregaAduana %}{{ importacionCubana.fechaEntregaAduana | date ('d/m/Y')  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Fecha de entrega de tránsito</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if importacionCubana.fechaEntregaTransito %}{{ importacionCubana.fechaEntregaTransito | date ('d/m/Y')  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Fecha de autorizo de embarque</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if importacionCubana.fechaAutorizoEmbarque %}{{ importacionCubana.fechaAutorizoEmbarque | date ('d/m/Y')  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}   
+    <script>
+        $(document).ready(function () {
+            $(".fancybox").fancybox();
+        });
+        $("#volveratras").click(function ()
+        {
+            location.href = "{{ path('importa_cubano_index') }}";
+        })
+        $("#modificar").click(function ()
+        {
+            location.href = "{{ path('importa_cubano_edit', {'id' : importacionCubana.id }) }}";
+        })
+    </script>
+{% endblock %}
+
+
+

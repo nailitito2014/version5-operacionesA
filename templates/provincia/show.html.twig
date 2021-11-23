@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Provincia{% endblock %}
+
+{% block body %}
+    <h1>Provincia</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ provincium.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ provincium.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Fecha</th>
+                <td>{{ provincium.fecha ? provincium.fecha|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>FechaInsercion</th>
+                <td>{{ provincium.fechaInsercion ? provincium.fechaInsercion|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('provincia_index') }}">back to list</a>
+
+    <a href="{{ path('provincia_edit', {'id': provincium.id}) }}">edit</a>
+
+    {{ include('provincia/_delete_form.html.twig') }}
+{% endblock %}

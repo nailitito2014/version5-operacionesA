@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css')}}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+{% block rootmenuclientes %}
+    class="start active open"
+{% endblock %}
+{% block body %}
+    <div class="page-content">
+        <div class="clearfix"></div><br>
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i>
+                    <a href="}">Inicio</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="#">Reportes</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="#">Búsquedas</a>
+                    <i class="fa fa-angle-right"></i>
+                    <a href="{{ path('busqueda_por_solicitud_servicio') }}">Búsqueda por solicitud de servicio</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet box blue-chambray">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-sitemap"></i>Búsqueda por solicitud de servicio
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        {{ form_start (form, {attr: {novalidate: 'novalidate'}}) }}
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label class="col-md-8 control-label">Número de solicitud</label>
+                                    {{ form_widget(form.numeroSolicitud, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                </div>
+
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label class="col-md-8 control-label">Cliente</label>
+                                    {{ form_widget(form.cliente, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                </div>
+
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label class="col-md-8 control-label">Tipo<br>de<br>servicio</label>
+                                        {{ form_widget(form.tipoServicio, { 'attr': {
+                                                    'class' : 'form-control',
+                                          } }) }}
+                                </div>
+
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label class="col-md-8 control-label">Vía de recepción</label>
+                                    {{ form_widget(form.viaRecepcion, { 'attr': {
+                                                    'class' : 'form-control',
+                                          } }) }}
+                                </div>
+                            </div>
+                        </div>
+                        {{ form_end (form) }}
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="box-body pad table-responsive">          
+                                    <table class="datatable table table-responsive table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="centrado">
+                                                    Número<br>de<br>solicitud<br>de<br>servicio
+                                                </th>
+                                                <th class="centrado">
+                                                    Cliente
+                                                </th>
+                                                <th class="centrado">
+                                                    Tipo de servicio
+                                                </th>
+                                                <th class="centrado">
+                                                    Vía<br>de<br>recepción 
+                                                </th>
+                                                <th class="centrado">
+                                                    Fecha<br>de<br>solicitud
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for solicitudServicio in solicitudesServicio %}
+                                                <tr>
+                                                    <td class="centrado">{% if solicitudServicio.numeroSolicitud %}{{ solicitudServicio.numeroSolicitud }}{% else %}-{% endif %}</td>
+                                                    <td class="centrado">{% if solicitudServicio.cliente %}{{ solicitudServicio.cliente }}{% else %}-{% endif %}</td>
+                                                    <td class="centrado">{% if solicitudServicio.tipoServicio %}{{ solicitudServicio.tipoServicio }}{% else %}-{% endif %}</td>
+                                                    <td class="centrado">{% if solicitudServicio.viaRecepcion %}{{ solicitudServicio.viaRecepcion }}{% else %}-{% endif %}</td>
+                                                    <td class="centrado">{% if solicitudServicio.fechaSolicitud %}{{ solicitudServicio.fechaSolicitud | date ('d/m/Y')}}{% else %}-{% endif %}</td>        
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{asset('js/deleteconfig.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/media/js/jquery.dataTables.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/media/js/table-managed.js')}}"></script>
+{% endblock %}

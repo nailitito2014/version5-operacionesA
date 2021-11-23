@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <link href="{{ app.request.schemeAndHttpHost ~ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ app.request.schemeAndHttpHost ~ asset('css/plugins.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ app.request.schemeAndHttpHost ~ asset('css/estilo.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ app.request.schemeAndHttpHost ~ asset('plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ app.request.schemeAndHttpHost ~ asset('plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ app.request.schemeAndHttpHost ~ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
+        <style>
+            table, tr, td, th, tbody, thead, tfoot {
+                page-break-inside: avoid !important;
+            }
+            table {
+                border-spacing: 0;
+                border-collapse: collapse;
+            }
+            td,
+            th {
+                padding: 8;
+            }
+            .table-bordered th, .table-bordered td {
+                border: 1px solid #ddd !important;
+            }
+        </style>
+    <img src="{{ app.request.schemeAndHttpHost ~ asset('logo.png')}}" style="margin-left: auto; margin-right: auto; display: block; width: 20%;"/> <br>
+</head>
+<div class="row">
+    <div class="col-md-12">
+        <div class="tabbable tabbable-custom boxless tabbable-reversed">
+            <div class="tab-content">
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    <div class="form-horizontal" role="form">
+                        <div class="form-body">
+                            <h3 class="form-section">Detalle de buque</h3>
+                            <table class="table table">
+                                <div class="row">
+                                    <tr>
+                                        <th>Buque</th>
+                                        <td>
+                                            <p class="control-label" style="text-align: left">
+                                                {% if buque.nombre %}{{ buque.nombre }}{% else %}-{% endif %}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Número de viaje</th>
+                                        <td>
+                                            <p class="control-label" style="text-align: left">
+                                                {% if buque.numeroViaje %}{{ buque.numeroViaje }}{% else %}-{% endif %}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Puerto de salida</th>
+                                        <td>
+                                            <p class="control-label" style="text-align: left">
+                                                {% if buque.puertoSalida %}{{ buque.puertoSalida }}{% else %}-{% endif %}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Monto</th>
+                                        <td>
+                                            <p class="control-label" style="text-align: left">
+                                                {% if factura.monto %} {{ factura.monto }} {% else %}-{% endif %}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Fecha de inserción</th>
+                                        <td>
+                                            <p class="control-label" style="text-align: left">
+                                                {% if buque.fechaInsercion %} {{ buque.fechaInsercion | date ('d/m/Y') }} {% else %}-{% endif %}
+                                            </p>
+                                        </td>
+                                    </tr>   
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
+
+
+

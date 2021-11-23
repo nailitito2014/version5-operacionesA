@@ -1,0 +1,143 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('plugins/datetimepicker/bootstrap-datetimepicker.min.css')}}" rel="stylesheet" type="text/css"/>
+  <link rel="stylesheet" type="text/css" href="{{ asset('plugins/bootstrap-toastr/toastr.min.css')}}"/> 
+{% endblock %}
+{% block rootmenubasesDatos %}
+    class="start active open"
+{% endblock %}
+{% block rootmenubasesDatoss %}
+    <span class="selected"></span>
+{% endblock %}
+{% block rootmenubasedatoarrow %}
+    open
+{% endblock %}
+{% block rootmenuRestaurarBD %} class="active" {% endblock %}
+{% block body %}
+    <div class="page-content">
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i>
+                    <a href="#">Inicio</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="#">Base de datos</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="{{ path('base_datos_cargar') }}">Restaurar</a>
+                </li>
+            </ul>
+        </div>
+        <div class="clearfix">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet box blue-chambray">                  
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-cogs"></i>Restaurar base de datos
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        {% for message in app.flashes('success') %}
+                            <div class="alert alert-success">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        {% for message in app.flashes('error') %}
+                            <div class="alert alert-danger">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        <div class="portlet-body form">
+                            {% for flashMessage in app.session.flashbag.get('notice') %}
+                                <div class="alert alert-success">
+                                    {{ flashMessage }}
+                                </div>
+                            {% endfor %} 
+                            {{ form_start(form, {'attr': {'class': 'form-horizontal','novalidate':'novalidate' }}) }}
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Servidor IP</label>
+                                    <div class="col-md-3">
+                                        {{ form_widget(form.servidorIp, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Nombre de usuario</label>
+                                    <div class="col-md-3">
+                                        {{ form_widget(form.nombreUsuario, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Contraseña</label>
+                                    <div class="col-md-3">
+                                        {{ form_widget(form.contrasenna, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                    </div>
+                                </div>
+                                <div class="form-group  {% if form.fecha.vars.valid==false %}has-error{% endif %}">
+                                    <div class="input text required">
+                                        <label class="col-md-2 control-label">Fecha:<span class="required"> *</span></label>
+                                        <div class="col-md-3">
+                                            <div class='input-group date' id='datetimepicker1'>
+                                                {{form_widget(form.fecha, {'attr': {'class' : 'form-control'}})}}
+                                                <span class="input-group-addon">
+                                                    <span class="fa fa-calendar"></span>
+                                                </span> 
+                                            </div>
+                                            {% if form.fecha.vars.valid==false %}
+                                                <span class="help-block">{{ form_errors(form.fecha)}}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div> 
+                                </div> 
+                            </div>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-offset-1 col-md-4">
+                                        {{ form_widget(form.Restaurar, { 'attr': {
+                                                    'class' : 'btn green',
+                                                    'label' : 'Restaurar'
+                                                    } }) }}
+                                    </div>
+                                </div>
+                            </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript"  src="{{ asset('plugins/datetimepicker/moment.min.js')}}"></script>
+    <script type="text/javascript"  src="{{ asset('plugins/datetimepicker/moment-with-locales.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/media/js/jquery.dataTables.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/media/js/table-managed.js')}}"></script>
+      <script src="{{ asset('plugins/bootstrap-toastr/toastr.min.js')}}"></script> 
+    <script src="{{ asset('validations/restaurarBD.js')}}"></script>
+     <script>
+         $(function () {
+                $('#datetimepicker1').datetimepicker({
+                    //minDate: moment().millisecond(0).second(0).minute(0).hour(0),
+                    format: 'DD/MM/YYYY',
+                    locale: 'es'});
+                $("#base_datos_fecha").removeAttr('readonly')
+            });
+    </script>
+{% endblock %}

@@ -1,0 +1,192 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/bootstrap-toastr/toastr.min.css')}}"/> 
+    <link href="{{ asset('plugins/datetimepicker/bootstrap-datetimepicker.min.css')}}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+{% block rootmenuclientes %}
+    class="start active open"
+{% endblock %}
+{% block body %}
+    <div class="page-content-wrapper">
+        <div class="page-content">
+            <div class="page-bar">
+                <ul class="page-breadcrumb">
+                    <li>
+                        <i class="fa fa-home"></i>
+                        <a href="#">Inicio</a>
+                        <i class="fa fa-angle-right"></i>
+                    </li>
+                    <li>
+                        <a href="{{ path('cliente_index') }}">Clientes</a>
+                        <i class="fa fa-angle-right"></i>
+                        <a href="#">Modificar</a> 
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tabbable tabbable-custom boxless tabbable-reversed">
+                        <div class="tab-content">
+                            {{ form_start(form, {'attr': {'class': 'form-horizontal','novalidate':'novalidate' }}) }}
+                            <div class="tab-pane active" id="tab_0">
+                                <div class="portlet light bg-inverse">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="font-red-sunglo"></i>
+                                            <span class="caption-subject font-red-sunglo bold">Modificar cliente</span>
+                                            <span class="caption-helper"></span>
+                                        </div>
+                                        <div class="actions btn-set">
+                                            <button type="button" class="btn default" id="volveratras"><i class="fa fa-angle-double-left"></i> Volver atrás</a></button>
+                                            <button class="btn green" {{ form_widget(form.Guardar)}}</button>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body form">
+                                        <div class="form-body"> 
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group {% if form.nombre.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-4 control-label">Nombre:</label>
+                                                        <div class="col-md-8">
+                                                            {{ form_widget(form.nombre, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.nombre.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.nombre)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group {% if form.primerApellido.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-4 control-label">Primer apellido:<span class="required"> *</span></label>
+                                                        <div class="col-md-8">
+                                                            {{ form_widget(form.primerApellido, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.primerApellido.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.primerApellido)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group {% if form.segundoApellido.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-4 control-label">Segundo apellido:<span class="required"> *</span></label>
+                                                        <div class="col-md-8">
+                                                            {{ form_widget(form.segundoApellido, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.segundoApellido.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.segundoApellido)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group {% if form.pasaporte.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-4 control-label">Pasaporte:<span class="required"> *</span></label>
+                                                        <div class="col-md-8">
+                                                            {{ form_widget(form.pasaporte, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.pasaporte.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.pasaporte)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                                <div class="col-sm-6">
+                                                    <div class="form-group {% if form.carnetIdentidad.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-4 control-label">Carnét de identidad:<span class="required"> *</span></label>
+                                                        <div class="col-md-8">
+                                                            {{ form_widget(form.carnetIdentidad, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.carnetIdentidad.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.carnetIdentidad)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div> 
+                                                    <div class="form-group {% if form.pais.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-4 control-label">País:<span class="required"> *</span></label>
+                                                        <div class="col-md-8">
+                                                            {{ form_widget(form.pais, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.pais.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.pais)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>    
+                                                    <div class="form-group {% if form.categoriaCliente.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-4 control-label">Categoría de cliente:<span class="required"> *</span></label>
+                                                        <div class="col-md-8">
+                                                            {{ form_widget(form.categoriaCliente, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.categoriaCliente.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.categoriaCliente)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div> 
+                                                    <div class="form-group  {% if form.fechaCertificoInmigracion.vars.valid==false %}has-error{% endif %}">
+                                                        <div class="input text required">
+                                                            <label class="col-md-4 control-label">Fecha de certifico de inmigración:<span class="required"> *</span></label>
+                                                            <div class="col-md-8">
+                                                                <div class='input-group date' id='datetimepicker1'>
+                                                                    {{form_widget(form.fechaCertificoInmigracion, {'attr': {'class' : 'form-control'}})}}
+                                                                    <span class="input-group-addon">
+                                                                        <span class="fa fa-calendar"></span>
+                                                                    </span> 
+                                                                </div>
+                                                                {% if form.fechaCertificoInmigracion.vars.valid==false %}
+                                                                    <span class="help-block">{{ form_errors(form.fechaCertificoInmigracion)}}</span>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div> 
+                                                    </div> 
+                                                              <div class="form-group  {% if form.fechaVencimientoCertificoInmigracion.vars.valid==false %}has-error{% endif %}">
+                                                        <div class="input text required">
+                                                            <label class="col-md-4 control-label">Fecha de vencimiento de certifico de inmigración:<span class="required"> *</span></label>
+                                                            <div class="col-md-8">
+                                                                <div class='input-group date' id='datetimepicker2'>
+                                                                    {{form_widget(form.fechaVencimientoCertificoInmigracion, {'attr': {'class' : 'form-control'}})}}
+                                                                    <span class="input-group-addon">
+                                                                        <span class="fa fa-calendar"></span>
+                                                                    </span> 
+                                                                </div>
+                                                                {% if form.fechaVencimientoCertificoInmigracion.vars.valid==false %}
+                                                                    <span class="help-block">{{ form_errors(form.fechaVencimientoCertificoInmigracion)}}</span>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div> 
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>       
+                                    {{ form_end(form) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}   
+    <script src="{{ asset('plugins/bootstrap-toastr/toastr.min.js')}}"></script> 
+    <script src="{{ asset('validations/cliente.js')}}"></script>
+    <script>
+        $("#volveratras").click(function ()
+        {
+            location.href = "{{ path('cliente_index') }}";
+        })
+        $('#datetimepicker1').datetimepicker({
+            //minDate: moment().millisecond(0).second(0).minute(0).hour(0),
+            format: 'DD/MM/YYYY',
+            locale: 'es'})
+          $('#datetimepicker2').datetimepicker({
+            //minDate: moment().millisecond(0).second(0).minute(0).hour(0),
+            format: 'DD/MM/YYYY',
+            locale: 'es'})
+    </script>
+{% endblock %}

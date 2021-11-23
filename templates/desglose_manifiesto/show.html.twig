@@ -1,0 +1,237 @@
+{% extends 'base.html.twig' %}
+{% block rootmenudesgloseManifiesto %}
+    class="start active open"
+{% endblock %}
+{% block body %}
+    <div class="page-content">
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i>
+                    <a href="#">Inicio</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="{{ path('contrato_index') }}">Desgloses de manifiesto</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>  <a href="#">Detalle</a>  </li>          
+            </ul>
+        </div>
+        <div class="clearfix">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tabbable tabbable-custom boxless tabbable-reversed">
+                    <div class="tab-content">
+                        <div class="portlet-body form">
+                            <!-- BEGIN FORM-->
+                            <div class="form-horizontal" role="form">
+                                <div class="form-body">
+                                    <h3 class="form-section">Desglose de manifiesto - {{ desglose_manifiesto  }}</h3>
+                                    <div class="actions btn-set" style="float: right;margin-top: -5px;">
+                                        <button class="btn-warning btn-sm blue" id="modificar">Modificar</button>
+                                        <button type="button" class="btn default btn-sm" id="volveratras">  <i class="fa fa-angle-double-left"></i> Regresar</button>
+                                    </div><br><br>
+                                    <div class="row">
+
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Número de desglose de manifiesto</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if desglose_manifiesto.numeroDesgloseManifiesto %}{{ desglose_manifiesto.numeroDesgloseManifiesto }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Número de MBL</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if desglose_manifiesto.numeroMBL %}{{ desglose_manifiesto.numeroMBL }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Contenedor</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if desglose_manifiesto.contenedor %}{{ desglose_manifiesto.contenedor }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Número de viaje</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if desglose_manifiesto.numeroViaje %}{{ desglose_manifiesto.numeroViaje  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Aduaman</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if desglose_manifiesto.aduaman %}{{ desglose_manifiesto.aduaman  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Persona a cargo de la carga</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if desglose_manifiesto.coment %}{{ desglose_manifiesto.coment  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Multa</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if desglose_manifiesto.multa %}Si{% else %}No{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Número de multa</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if desglose_manifiesto.numeroMulta %}{{ desglose_manifiesto.numeroMulta  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Fecha de arribo de buque</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if desglose_manifiesto.fechaArriboBuque %}{{ desglose_manifiesto.fechaArriboBuque | date ('d/m/Y')  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Fecha de recibo de manifiesto</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if desglose_manifiesto.fechaReciboManifiesto %}{{ desglose_manifiesto.fechaReciboManifiesto | date('d/m/Y')  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Fecha de desglose de manifiesto</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if desglose_manifiesto.fechaDesgloseManifiesto %}{{ desglose_manifiesto.fechaDesgloseManifiesto | date('d/m/Y')  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Fecha de notificación de multa</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if desglose_manifiesto.fechaNotificacionMulta %}{{ desglose_manifiesto.fechaNotificacionMulta | date('d/m/Y')  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">  
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><strong>Fecha de recibida la multa</strong></label>
+                                                <div class="col-md-9">
+                                                    <div class="control-label well" style="text-align: left">
+                                                        {% autoescape false %}
+                                                            {% if desglose_manifiesto.fechaRecibidaMulta %}{{ desglose_manifiesto.fechaRecibidaMulta | date('d/m/Y')  }}{% else %}-{% endif %}
+                                                        {% endautoescape %}
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}   
+    <script>
+        $(document).ready(function () {
+            $(".fancybox").fancybox();
+        });
+        $("#volveratras").click(function ()
+        {
+            location.href = "{{ path('desglose_manifiesto_index') }}";
+        })
+        $("#modificar").click(function ()
+        {
+            location.href = "{{ path('desglose_manifiesto_edit', {'id' : desglose_manifiesto.id }) }}";
+        })
+    </script>
+{% endblock %}
+
+
+

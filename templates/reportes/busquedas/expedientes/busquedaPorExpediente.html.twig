@@ -1,0 +1,190 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css')}}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+{% block rootmenuclientes %}
+    class="start active open"
+{% endblock %}
+{% block body %}
+    <div class="page-content">
+        <div class="clearfix"></div><br>
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i>
+                    <a href="}">Inicio</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="#">Reportes</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="#">Búsquedas</a>
+                    <i class="fa fa-angle-right"></i>
+                    <a href="{{ path('busqueda_por_expediente') }}">Búsqueda por expedientes</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet box blue-chambray">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-sitemap"></i>Búsqueda por expedientes
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        {{ form_start (form, {attr: {novalidate: 'novalidate'}}) }}
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Nombre</label>
+                                    {{ form_widget(form.nombre, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-10 control-label">Primer apellido</label>
+                                    {{ form_widget(form.primerApellido, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label class="col-md-8 control-label">Segundo apellido</label>
+                                    {{ form_widget(form.segundoApellido, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-8 control-label">Bultos</label>
+                                    {{ form_widget(form.bultos, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label class="col-md-8 control-label">Pies</label>
+                                    {{ form_widget(form.pies, { 'attr': {
+                                                    'class' : 'form-control',
+                                          } }) }}
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-8 control-label">Número de expediente</label>
+                                    {{ form_widget(form.numeroExpediente, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label class="col-md-8 control-label">Número de MBL</label>
+                                    {{ form_widget(form.numeroMBL, { 'attr': {
+                                                    'class' : 'form-control',
+                                          } }) }}
+                                </div>
+                            </div>
+                        </div>
+                        {{ form_end (form) }}
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="box-body pad table-responsive">          
+                                    <table class="datatable table table-responsive table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="centrado">
+                                                    Número de expediente
+                                                </th>
+                                                <th class="centrado">
+                                                    Primer apellido
+                                                </th>
+                                                <th class="centrado">
+                                                    Segundo apellido
+                                                </th>
+                                                <th class="centrado">
+                                                    Número<br>de<br>MBL 
+                                                </th>
+                                                <th class="centrado">
+                                                    Pies
+                                                </th>
+                                                <th class="centrado">
+                                                    Peso en KG
+                                                </th>
+                                                <th class="centrado">
+                                                    Naviera
+                                                </th>
+                                                <th class="centrado">
+                                                    Contenedor
+                                                </th>
+                                                <th class="centrado">
+                                                    País
+                                                </th>
+                                                <th class="centrado">
+                                                    Provincia
+                                                </th>
+                                                <th class="centrado">
+                                                    Bultos
+                                                </th>
+                                                <th class="centrado">
+                                                <th class="centrado">
+                                                    Recibo aduana
+                                                </th>
+                                                <th class="centrado">
+                                                <th class="centrado">
+                                                    Entregado agencia
+                                                </th>
+                                                <th class="centrado">
+                                                    Desglose de manifiesto
+                                                </th>
+                                                <th class="centrado">
+                                                    Fecha de<br>arribo
+                                                </th>
+                                                <th class="centrado">
+                                                    Fecha de<br>entrega
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for expediente in expedientes %}
+                                                <tr>
+                                                    <td class="centrado">{% if expediente.nombre %}{{ expediente.nombre }}{% else %}-{% endif %}</td>
+                                                    <td class="centrado">{% if expediente.primerApellido %}{{ expediente.primerApellido }}{% else %}-{% endif %}</td>
+                                                    <td class="centrado">{% if expediente.segundoApellido %}{{ expediente.segundoApellido }}{% else %}-{% endif %}</td>
+                                                    <td class="centrado">{% if expediente.numeroMBL %}{{ expediente.numeroMBL }}{% else %}-{% endif %}</td>
+                                                    <td class="centrado">{% if expediente.pies %}{{ expediente.pies }}{% else %}-{% endif %}</td>
+                                                    <td class="centrado">{% if expediente.pesoKg %}{{ expediente.pesoKg }}{% else %}-{% endif %}</td>
+                                                    <td class="centrado">{% if expediente.naviera %}{{ expediente.naviera }}{% else %}-{% endif %}</td>
+                                                    <td class="centrado">{% if expediente.contenedor %}{{ expediente.contenedor }}{% else %}-{% endif %}</td>
+                                                    <td class="centrado">{% if expediente.pais %}{{ expediente.pais }}{% else %}-{% endif %}</td>
+                                                    <td class="centrado">{% if expediente.provincia %}{{ expediente.provincia }}{% else %}-{% endif %}</td>
+                                                    <td class="centrado">{% if expediente.bultos %}{{ expediente.bultos }}{% else %}-{% endif %}</td>
+                                                    <td class="centrado">{% if expediente.recibidoAduana %}{{ expediente.recibidoAduana }}{% else %}-{% endif %}</td>
+                                                    <td class="centrado">{% if expediente.entregadoAgencia %}{{ expediente.entregadoAgencia }}{% else %}-{% endif %}</td>
+                                                    <td class="centrado">{% if expediente.desgloseManifiesto %}{{ expediente.desgloseManifiesto }}{% else %}-{% endif %}</td>
+                                                    <td class="centrado">{% if expediente.fechaArribo %}{{ expediente.fechaArribo | date ('d/m/Y')}}{% else %}-{% endif %}</td>        
+                                                    <td class="centrado">{% if expediente.fechaEntrega %}{{ expediente.fechaEntrega | date ('d/m/Y')}}{% else %}-{% endif %}</td>         
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{asset('js/deleteconfig.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/media/js/jquery.dataTables.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/media/js/table-managed.js')}}"></script>
+{% endblock %}

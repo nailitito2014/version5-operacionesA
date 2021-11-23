@@ -1,0 +1,160 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css')}}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+{% block rootmenuImportacionesExportacionesExtranjeras %}
+    class="start active open"
+{% endblock %}
+{% block rootmenuimportacionesexportacionesarrow %}
+    open
+{% endblock %}
+{% block rootmenucontenedores %} class="active" {% endblock %}
+{% block body %}
+    <div class="page-content">
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i>
+                    <a href="#">Inicio</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="{{ path('contenedor_index') }}">Contenedores</a>
+                </li>
+            </ul>
+        </div>
+        <div class="clearfix">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet box blue-chambray">                  
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-cogs"></i>Contenedores
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        {% for message in app.flashes('success') %}
+                            <div class="alert alert-success">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        {% for message in app.flashes('error') %}
+                            <div class="alert alert-danger">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        <div class="table-toolbar">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="btn-group">
+                                        <a href="{{ path('contenedor_new') }}" class="btn green">
+                                            <i class="fa fa-plus"></i> Adicionar 
+                                        </a>
+                                    </div>
+                                    <a class="btn red" id="deleteAllContenedores" href="javascript:void(0);">
+                                        <i class="fa fa-minus"></i> Eliminar todos
+                                    </a> 
+                                    <button type="submit" class="btn green-meadow" value="pdf" name="PDF">
+                                        <i class="fa fa-file-pdf-o"></i> Exportar a PDF
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <form action="{{ path('contenedores_delete_all') }}" method="POST" id="contenedores">
+                            <table class="datatable table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr class="heading">
+                                        <th class="centrado">
+                                            <input type="checkbox" id="selectAllContenedores"/>
+                                        </th>
+                                        <th class="centrado">
+                                            Número<br>de<br>contenedor
+                                        </th>
+                                        <th class="centrado">
+                                            Número<br>de<br>MBL
+                                        </th>
+                                        <th class="centrado">
+                                            Cantidad<br>de<br>menajes
+                                        </th>
+                                        <th class="centrado">
+                                            Kgs carga
+                                        </th>
+                                        <th class="centrado">
+                                            Buque
+                                        </th>
+                                        <th class="centrado">
+                                            Acciones
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for contenedor in contenedors %}
+                                        <tr>
+                                            <td class="centrado">
+                                                <input type="checkbox" value="{{ contenedor.id }}" name="contenedores[]"/>
+                                            </td>  
+                                            <td class="centrado">{% if contenedor.numeroContenedor %}{{ contenedor.numeroContenedor }}{% else %}-{% endif %}</td>
+                                            <td class="centrado">{% if contenedor.mbl %}{{ contenedor.mbl }}{% else %}-{% endif %}</td>
+                                            <td class="centrado">{% if contenedor.cantMenajes %}{{ contenedor.cantMenajes }}{% else %}-{% endif %}</td>
+                                            <td class="centrado">{% if contenedor.kgCarga %}{{ contenedor.kgCarga }}{% else %}-{% endif %}</td>
+                                            <td class="centrado">{% if contenedor.buque %}{{ contenedor.buque }}{% else %}-{% endif %}</td>
+                                            <td style="width: 40%;"  class="actions-two-button centrado formato">
+                                                <a  href="{{ path('contenedor_edit', {'id' :  contenedor.id })}}" title="Editar">
+                                                    <i class="fa fa-pencil btn btn-sm blue"></i>
+                                                </a>
+                                                <a  href="{{ path('contenedor_show', {'id' :  contenedor.id })}}" title="Ver detallle">
+                                                    <i class="fa fa-search-plus btn btn-sm btn-warning"></i>
+                                                </a>
+                                                <a class="link-eliminar" href="javascript:void(0)"
+                                                   data-url="{{ path('contenedor_delete', { 'id': contenedor.id }) }}"
+                                                   data-descripcion="El contenedor {{ contenedor }} se eliminará del sistema."
+                                                   data-toggle="modal" data-target="#modal-delete" title="Eliminar">
+                                                    <span class="red">
+                                                        <i class="fa fa-trash-o btn btn-sm red"></i>
+                                                    </span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+    {% include "modal-delete.html.twig" %}  
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{asset('js/deleteconfig.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/media/js/jquery.dataTables.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/media/js/table-managed.js')}}"></script>
+    <script>
+        $(function () {
+            $("#deleteAllContenedores").click(function () {
+                $("#contenedores").submit()
+            })
+        });
+        $('#selectAllContenedores').click(function (event) {
+            if (this.checked) {
+                $(':checkbox').each(function () {
+
+                    this.checked = true;
+                });
+            } else {
+                $(':checkbox').each(function () {
+                    this.checked = false;
+                });
+            }
+        });
+        $(document).ready(function () {
+            $(".fancybox").fancybox();
+        });
+    </script>
+{% endblock %}

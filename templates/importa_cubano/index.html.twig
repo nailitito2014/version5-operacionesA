@@ -1,0 +1,170 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css')}}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+{% block rootmenuimportacioncubanos %}
+    class="start active open"
+{% endblock %}
+{% block rootmenunomencladoraux %}
+    <span class="selected"></span>
+{% endblock %}
+{% block rootmenuimportacionescubanosarrow %}
+    open
+{% endblock %}
+{% block rootmenuimportacionescubanos %} class="active" {% endblock %}
+{% block body %}
+    <div class="page-content">
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i>
+                    <a href="#">Inicio</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="#">Servicios Importación Cubanos</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="{{ path('categoria_cliente_index') }}">Importaciones cubanas</a>
+                </li>
+            </ul>
+        </div>
+        <div class="clearfix">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet box blue-chambray">                  
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-cogs"></i>Importaciones cubanas
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        {% for message in app.flashes('success') %}
+                            <div class="alert alert-success">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        {% for message in app.flashes('error') %}
+                            <div class="alert alert-danger">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        <div class="table-toolbar">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="btn-group">
+                                        <a href="{{ path('importa_cubano_new') }}" class="btn green">
+                                            <i class="fa fa-plus"></i> Adicionar 
+                                        </a>
+                                    </div>
+                                    <a class="btn red" id="deleteAllCategoriasCliente" href="javascript:void(0);">
+                                        <i class="fa fa-minus"></i> Desactivar todos
+                                    </a> 
+                                </div>
+                            </div>
+                        </div>
+                        <form action="{{ path('importaciones_cubanas_delete_all') }}" method="POST" id="categoriasCliente">
+                            <table class="datatable table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr class="heading">
+                                        <th class="centrado">
+                                            <input type="checkbox" id="selectAllCategoriasCliente"/>
+                                        </th>
+                                        <th class="centrado">
+                                            Número<br>de<br>importación cubano
+                                        </th>
+                                        <th class="centrado">
+                                            Estado<br>de<br>servicio
+                                        </th>
+                                        <th class="centrado">
+                                            Transitario
+                                        </th>
+                                        <th class="centrado">
+                                            Naviera
+                                        </th>
+                                        <th class="centrado">
+                                            Contenedor
+                                        </th>
+                                        <th class="centrado">
+                                            Acciones
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for importacionCubana in importa_cubanos %}
+                                        <tr>
+                                            <td class="centrado">
+                                                <input type="checkbox" value="{{ importacionCubana.id }}" name="importacionesCubanas[]"/>
+                                            </td>  
+                                            <td class="centrado">{% if importacionCubana.numeroImportacionCubano %}{{ importacionCubana.numeroImportacionCubano }}{% else %}-{% endif %}</td>
+                                            <td class="centrado">{% if importacionCubana.estadoServicio %}{{ importacionCubana.estadoServicio }}{% else %}-{% endif %}</td>
+                                            <td class="centrado">{% if importacionCubana.transitario %}{{ importacionCubana.transitario }}{% else %}-{% endif %}</td>
+                                            <td class="centrado">{% if importacionCubana.naviera %}{{ importacionCubana.naviera }}{% else %}-{% endif %}</td>
+                                            <td class="centrado">{% if importacionCubana.contenedor %}{{ importacionCubana.contenedor }}{% else %}-{% endif %}</td>
+
+
+
+                                            <td style="width: 40%;"  class="actions-two-button centrado formato">
+                                                <a  href="{{ path('importa_cubano_edit', {'id' :  importacionCubana.id })}}" title="Editar">
+                                                    <i class="fa fa-pencil btn btn-sm blue"></i>
+                                                </a>
+                                                <a  href="{{ path('importa_cubano_show', {'id' :  importacionCubana.id })}}" title="Ver detalle">
+                                                    <i class="fa fa-search-plus btn btn-sm btn-warning"></i>
+                                                </a>
+                                                     {% if importacionCubana.importacionCubanaActiva %}
+                                                <a  href="{{ path('desactivar_importacion_cubana', {'id' : importacionCubana.id })}}" title="Desactivar importación cubana">
+                                                    <i class="fa fa-arrow-up btn btn-sm red"></i>
+                                                </a>
+                                                    {% else %}
+                                                        <a  href="#" title="Importación cubana desactivada">
+                                                    <i class="fa fa-arrow-down btn btn-sm red"></i>
+                                                </a>  
+                                                        
+                                                        
+                                                        {% endif %}
+                                            
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+    {% include "modal-delete.html.twig" %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{asset('js/deleteconfig.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/media/js/jquery.dataTables.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/media/js/table-managed.js')}}"></script>
+    <script>
+        $(function () {
+            $("#deleteAllImportacionesCubanas").click(function () {
+                $("#importacionesCubanas").submit()
+            })
+        });
+        $('#selectAllImportacionesCubanas').click(function (event) {
+            if (this.checked) {
+                $(':checkbox').each(function () {
+
+                    this.checked = true;
+                });
+            } else {
+                $(':checkbox').each(function () {
+                    this.checked = false;
+                });
+            }
+        });
+        $(document).ready(function () {
+            $(".fancybox").fancybox();
+        });
+    </script>
+{% endblock %}

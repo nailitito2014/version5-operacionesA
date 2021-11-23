@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css')}}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+{% block rootmenubasesDatos %}
+    class="start active open"
+{% endblock %}
+{% block rootmenubasesDatoss %}
+    <span class="selected"></span>
+{% endblock %}
+{% block rootmenubasedatoarrow %}
+    open
+{% endblock %}
+{% block rootmenusalvarBD %} class="active" {% endblock %}
+{% block body %}
+    <div class="page-content">
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i>
+                    <a href="#">Inicio</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="#">Base de datos</a>
+                    <i class="fa fa-angle-right"></i>
+
+                </li>
+                <li>
+                    <a href="{{ path('base_datos_salvar') }}">Salvar</a>
+                </li>
+            </ul>
+        </div>
+        <div class="clearfix">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet box blue-chambray">                  
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-cogs"></i>Base de datos
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        {% for message in app.flashes('success') %}
+                            <div class="alert alert-success">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        {% for message in app.flashes('error') %}
+                            <div class="alert alert-danger">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        <div class="portlet-body form">
+                            {% for flashMessage in app.session.flashbag.get('notice') %}
+                                <div class="alert alert-success">
+                                    {{ flashMessage }}
+                                </div>
+                            {% endfor %} 
+                            {{ form_start(form, {'attr': {'class': 'form-horizontal','novalidate':'novalidate' }}) }}
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Servidor IP</label>
+                                    <div class="col-md-3">
+                                        {{ form_widget(form.servidorIp, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Nombre de usuario</label>
+                                    <div class="col-md-3">
+                                        {{ form_widget(form.nombreUsuario, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Contraseña</label>
+                                    <div class="col-md-3">
+                                        {{ form_widget(form.contrasenna, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-offset-1 col-md-4">
+                                        {{ form_widget(form.Salvar, { 'attr': {
+                                                    'class' : 'btn green',
+                                                    'label' : 'Salvar'
+                                                    } }) }}
+                                    </div>
+                                </div>
+                            </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('plugins/datatables/media/js/jquery.dataTables.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/media/js/table-managed.js')}}"></script>
+    <script src="{{ asset('bundles/validations/salvarBD.js')}}"></script>
+    <script>
+        $(document).ready(function () {
+            $(".fancybox").fancybox();
+        });
+    </script>
+{% endblock %}

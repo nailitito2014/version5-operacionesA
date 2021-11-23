@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Programacion{% endblock %}
+
+{% block body %}
+    <h1>Programacion</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ programacion.id }}</td>
+            </tr>
+            <tr>
+                <th>Observaciones</th>
+                <td>{{ programacion.observaciones }}</td>
+            </tr>
+            <tr>
+                <th>FechaArriboMariel</th>
+                <td>{{ programacion.fechaArriboMariel ? programacion.fechaArriboMariel|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>FechaEntregadoAduana</th>
+                <td>{{ programacion.fechaEntregadoAduana ? programacion.fechaEntregadoAduana|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>FechaDespachar</th>
+                <td>{{ programacion.fechaDespachar ? programacion.fechaDespachar|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Deposito</th>
+                <td>{{ programacion.deposito }}</td>
+            </tr>
+            <tr>
+                <th>Bultos</th>
+                <td>{{ programacion.bultos }}</td>
+            </tr>
+            <tr>
+                <th>NumeroManifiesto</th>
+                <td>{{ programacion.numeroManifiesto }}</td>
+            </tr>
+            <tr>
+                <th>NumeroDesglose</th>
+                <td>{{ programacion.numeroDesglose }}</td>
+            </tr>
+            <tr>
+                <th>DetalleCarga</th>
+                <td>{{ programacion.detalleCarga }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('programacion_index') }}">back to list</a>
+
+    <a href="{{ path('programacion_edit', {'id': programacion.id}) }}">edit</a>
+
+    {{ include('programacion/_delete_form.html.twig') }}
+{% endblock %}

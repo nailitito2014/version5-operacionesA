@@ -1,0 +1,177 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css')}}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+{% block rootmenuImportacionesExportacionesExtranjeras %}
+    class="start active open"
+{% endblock %}
+{% block rootmenuimportacionesexportacionesarrow %}
+    open
+{% endblock %}
+{% block rootmenuexportaciones %} class="active" {% endblock %}
+{% block body %}
+    <div class="page-content">
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i>
+                    <a href="#">Inicio</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="#">Servicios Importación Exportación Extranjeras</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="{{ path('exportacion_index') }}">Exportaciones</a>
+                </li>
+            </ul>
+        </div>
+        <div class="clearfix">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet box blue-chambray">                  
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-cogs"></i>Exportaciones
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        {% for message in app.flashes('success') %}
+                            <div class="alert alert-success">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        {% for message in app.flashes('error') %}
+                            <div class="alert alert-danger">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        <div class="table-toolbar">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="btn-group">
+                                        <a href="{{ path('exportacion_new') }}" class="btn green">
+                                            <i class="fa fa-plus"></i> Adicionar 
+                                        </a>
+                                    </div>
+                                    <!--<a class="btn red" id="deleteAllExportaciones" href="javascript:void(0);">
+                                        <i class="fa fa-minus"></i> Eliminar todos
+                                    </a>--> 
+                                    <button type="submit" class="btn green-meadow" value="pdf" name="PDF">
+                                        <i class="fa fa-file-pdf-o"></i> Exportar a PDF
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <form action="{{ path('exportaciones_delete_all') }}" method="POST" id="exportaciones">
+                            <table class="datatable table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr class="heading">
+                                        <th class="centrado">
+                                            Número<br>de<br>exportación
+                                        </th>
+
+                                        <th class="centrado">
+                                            Solicitud<br>del<br>servicio
+                                        </th>
+                                        <th class="centrado">
+                                            Puerto destino
+                                        </th>
+                                        <th class="centrado">
+                                            Puerto origen
+                                        </th>
+                                        <th class="centrado">
+                                            Contenedor
+                                        </th>
+                                        <th class="centrado">
+                                            Presupuesto
+                                        </th>
+                                        <th class="centrado">
+                                            Via<br>de<br>transportación
+                                        </th>
+                                        <th class="centrado">
+                                            Acciones
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for exportacion in exportacions %}
+                                        <tr>
+                                            <td class="centrado">{% if exportacion.numeroExportacion %}{{ exportacion.numeroExportacion }}{% else %}-{% endif %}</td>
+                                            <td class="centrado">{% if exportacion.solicitudServicio %}{{ exportacion.solicitudServicio }}{% else %}-{% endif %}</td>
+                                            <td class="centrado">{% if exportacion.puertoDestino %}{{ exportacion.puertoDestino }}{% else %}-{% endif %}</td>
+                                            <td class="centrado">{% if exportacion.puertoOrigen %}{{ exportacion.puertoOrigen }}{% else %}-{% endif %}</td>
+                                            <td class="centrado">{% if exportacion.contenedor %}{{ exportacion.contenedor }}{% else %}-{% endif %}</td>
+                                            <td class="centrado">{% if exportacion.presupuesto %}{{ exportacion.presupuesto }}
+                                             {% if exportacion.tipoMoneda == 'CUP'%}CUP
+                                                    {% elseif exportacion.tipoMoneda == 'CUC' %}CUC
+                                                        {% endif %}
+                                            {% else %}-{% endif %}</td>
+                                            <td class="centrado">{% if exportacion.viaTransportacion %}{{ exportacion.viaTransportacion }}{% else %}-{% endif %}</td>
+
+                                            <td style="width: 25%;"  class="actions-two-button centrado formato">
+                                                 {% if exportacion.exportacionActiva  %}
+                                              
+                                                <a  href="{{ path('exportacion_edit', {'id' :  exportacion.id })}}" title="Editar">
+                                                    <i class="fa fa-pencil btn btn-sm blue"></i>
+                                                </a> 
+                                                {% endif %}
+                                                
+                                                <a  href="{{ path('exportacion_show', {'id' :  exportacion.id })}}" title="Ver detalle">
+                                                    <i class="fa fa-search-plus btn btn-sm btn-warning"></i>
+                                                </a> 
+                                                        {% if exportacion.exportacionActiva == false %}
+                                                    <a  href="#" title="Exportación desactivada">
+                                                        <i class="fa fa-arrow-down btn btn-sm red"></i>
+                                                    </a>
+                                                {% else %}
+                                                    <a  href="{{ path('desactivar_exportacion', {'id' :  exportacion.id })}}" title="Desactivar exportación">
+                                                        <i class="fa fa-arrow-up btn btn-sm red"></i>
+                                                    </a>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+    {% include "modal-delete.html.twig" %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{asset('js/deleteconfig.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/media/js/jquery.dataTables.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/media/js/table-managed.js')}}"></script>
+    <script>
+        $(function () {
+            $("#deleteAllExportaciones").click(function () {
+                $("#exportaciones").submit()
+            })
+        });
+        $('#selectAllExportaciones').click(function (event) {
+            if (this.checked) {
+                $(':checkbox').each(function () {
+
+                    this.checked = true;
+                });
+            } else {
+                $(':checkbox').each(function () {
+                    this.checked = false;
+                });
+            }
+        });
+        $(document).ready(function () {
+            $(".fancybox").fancybox();
+        });
+    </script>
+{% endblock %}

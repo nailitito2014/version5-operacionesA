@@ -1,0 +1,184 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/bootstrap-toastr/toastr.min.css')}}"/> 
+{% endblock %}
+{% block rootmenuImportacionesExportacionesExtranjeras %}
+    class="start active open"
+{% endblock %}
+{% block rootmenuimportacionesexportacionesarrow %}
+    open
+{% endblock %}
+{% block rootmenucontenedores %} class="active" {% endblock %}
+{% block body %}
+    <div class="page-content-wrapper">
+        <div class="page-content">
+            <div class="page-bar">
+                <ul class="page-breadcrumb">
+                    <li>
+                        <i class="fa fa-home"></i>
+                        <a href="#">Inicio</a>
+                        <i class="fa fa-angle-right"></i>
+                    </li>
+                    <li>
+                        <a href="{{ path('contenedor_index') }}">Contenedores</a>
+                        <i class="fa fa-angle-right"></i>
+                        <a href="#">Nuevo</a> 
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tabbable tabbable-custom boxless tabbable-reversed">
+                        <div class="tab-content">
+                            {{ form_start(form, {'attr': {'class': 'form-horizontal','novalidate':'novalidate' }}) }}
+                            <div class="tab-pane active" id="tab_0">
+                                <div class="portlet light bg-inverse">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="font-red-sunglo"></i>
+                                            <span class="caption-subject font-red-sunglo bold">Adicionar contenedor</span>
+                                            <span class="caption-helper"></span>
+                                        </div>
+                                        <div class="actions btn-set">
+                                            <button type="button" class="btn default" id="volveratras"><i class="fa fa-angle-double-left"></i> Volver atrás</a></button>
+                                            <button class="btn green" {{ form_widget(form.Guardar)}}</button>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body form">
+                                        <div class="form-body"> 
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <div class="form-group {% if form.numeroContenedor.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-7 control-label">Número de contenedor:<span class="required"> *</span></label>
+                                                        <div class="col-md-5">
+                                                            {{ form_widget(form.numeroContenedor, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.numeroContenedor.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.numeroContenedor)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group {% if form.mbl.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-7 control-label">Número de MBL:<span class="required"> *</span></label>
+                                                        <div class="col-md-5">
+                                                            {{ form_widget(form.mbl, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.mbl.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.mbl)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group {% if form.kgCarga.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-7 control-label">Kg de carga:<span class="required"> *</span></label>
+                                                        <div class="col-md-5">
+                                                            {{ form_widget(form.kgCarga, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.kgCarga.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.kgCarga)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>   
+                                                </div> 
+                                                <div class="col-sm-3">
+
+                                                    <div class="form-group {% if form.cantMenajes.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-6 control-label">Cantidad de menajes:<span class="required"> *</span></label>
+                                                        <div class="col-md-5">
+                                                            {{ form_widget(form.cantMenajes, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.cantMenajes.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.cantMenajes)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group {% if form.cantBultos.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-6 control-label">Cantidad de bultos:<span class="required"> *</span></label>
+                                                        <div class="col-md-5">
+                                                            {{ form_widget(form.cantBultos, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.cantBultos.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.cantBultos)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div> 
+
+                                                    <div class="form-group {% if form.cantidadEnvio.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-6 control-label">Cantidad de envío:<span class="required"> *</span></label>
+                                                        <div class="col-md-5">
+                                                            {{ form_widget(form.cantidadEnvio, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.cantidadEnvio.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.cantidadEnvio)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-group {% if form.colaboradores.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-6 control-label">Colaboradores:<span class="required"> *</span></label>
+                                                        <div class="col-md-5">
+                                                            {{ form_widget(form.colaboradores, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.colaboradores.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.colaboradores)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>    
+                                                    <div class="form-group {% if form.cantEna.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-6 control-label">Cantidad de equipaje no acompañado:<span class="required"> *</span></label>
+                                                        <div class="col-md-5">
+                                                            {{ form_widget(form.cantEna, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.cantEna.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.cantEna)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>     
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group {% if form.buque.vars.valid==false %}has-error{% endif %}">
+                                                        <label class="col-md-3 control-label">Buque:<span class="required"> *</span></label>
+                                                        <div class="col-md-7">
+                                                            {{ form_widget(form.buque, { 'attr': {
+                                                    'class' : 'form-control',
+                                                    } }) }}
+                                                            {% if form.buque.vars.valid==false %}
+                                                                <span class="help-block">{{ form_errors(form.buque)}}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div> 
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>       
+                                    {{ form_end(form) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}   
+    <script src="{{ asset('plugins/bootstrap-toastr/toastr.min.js')}}"></script> 
+    <script src="{{ asset('validations/contenedor.js')}}"></script>
+    <script>
+        $("#volveratras").click(function ()
+        {
+            location.href = "{{ path('contenedor_index') }}";
+        })
+    </script>
+{% endblock %}

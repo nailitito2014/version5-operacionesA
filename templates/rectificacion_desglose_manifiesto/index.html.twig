@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css')}}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+{% block rootmenuGestionesManifiesto %}
+    class="start active open"
+{% endblock %}
+{% block rootmenugestionesmanifiestoarrow %}
+    open
+{% endblock %}
+{% block rootmenurectificacionesDesglosesManifiesto %} class="active" {% endblock %}
+{% block body %}
+    <div class="page-content">
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i>
+                    <a href="#">Inicio</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="#">Gestiones de Manifiesto</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="{{ path('rectificacion_desglose_manifiesto_index') }}">Rectificaciones de desgloses de manifiesto</a>
+                </li>
+            </ul>
+        </div>
+        <div class="clearfix">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet box blue-chambray">                  
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-cogs"></i>Rectificaciones de desgloses de manifiesto
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        {% for message in app.flashes('success') %}
+                            <div class="alert alert-success">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        {% for message in app.flashes('error') %}
+                            <div class="alert alert-danger">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        <div class="table-toolbar">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="btn-group">
+                                        <a href="{{ path('rectificacion_desglose_manifiesto_new') }}" class="btn green">
+                                            <i class="fa fa-plus"></i> Adicionar 
+                                        </a>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                        <table class="datatable table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr class="heading">
+                                    <th class="centrado">
+                                        Número<br>de<br>rectificación<br>de desglose
+                                    </th>
+                                    <th class="centrado">
+                                        Número<br>de<br>MBL
+                                    </th>
+                                    <th class="centrado">
+                                        Contenedor
+                                    </th>
+                                    <th class="centrado">
+                                        Naviera
+                                    </th>
+                                    <th class="centrado">
+                                        Multa
+                                    </th>
+                                    <th class="centrado">
+                                        Acciones
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for rectificacionDesgloseManifiesto in rectificacion_desglose_manifiestos %}
+                                    <tr>
+                                        <td class="centrado">{% if rectificacionDesgloseManifiesto.numeroRectificacionDesglose %}{{ rectificacionDesgloseManifiesto.numeroRectificacionDesglose }}{% else %}-{% endif %}</td>
+                                        <td class="centrado">{% if rectificacionDesgloseManifiesto.numeroMBL %}{{ rectificacionDesgloseManifiesto.numeroMBL }}{% else %}-{% endif %}</td>
+                                        <td class="centrado">{% if rectificacionDesgloseManifiesto.contenedor %}{{ rectificacionDesgloseManifiesto.contenedor }}{% else %}-{% endif %}</td>
+                                        <td class="centrado">{% if rectificacionDesgloseManifiesto.naviera %}{{ rectificacionDesgloseManifiesto.naviera }}{% else %}-{% endif %}</td>
+                                        <td class="centrado">{% if rectificacionDesgloseManifiesto.multa %}Si{% else %}No{% endif %}</td>
+                                        
+                                        
+                                        <td style="width: 40%;"  class="actions-two-button centrado formato">
+                                            <a  href="{{ path('rectificacion_desglose_manifiesto_edit', {'id' :  rectificacionDesgloseManifiesto.id })}}" title="Editar">
+                                                <i class="fa fa-pencil btn btn-sm blue"></i>
+                                            </a>
+                                                 <a  href="{{ path('rectificacion_desglose_manifiesto_show', {'id' :  rectificacionDesgloseManifiesto.id })}}" title="Ver detalle">
+                                                <i class="fa fa-search-plus btn btn-sm btn-warning"></i>
+                                            </a> 
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('plugins/datatables/media/js/jquery.dataTables.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/datatables/media/js/table-managed.js')}}"></script>
+    <script>
+        $(document).ready(function () {
+            $(".fancybox").fancybox();
+        });
+    </script>
+{% endblock %}
