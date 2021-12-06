@@ -33,7 +33,7 @@ class InicioController extends AbstractController
        
         $solicitudesServicio = count($entityManager->getRepository("App:SolicitudServicio")->findAll());
         $serviciosImportacionExtranjera = count($entityManager->getRepository("App:Exportacion")->findAll());
-        $serviciosImportacionCubanos = count($entityManager->getRepository("App:ImportaCubano")->findAll());
+        $serviciosImportacionCubanos = count($entityManager->getRepository("App:ImportacionCubano")->findAll());
         $serviciosImportacion = count($entityManager->getRepository("App:Importacion")->findAll());
            
         
